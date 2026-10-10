@@ -3515,6 +3515,65 @@ a {
   color: #1677ff;
 }
 
+.change-password-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.profile-password-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.profile-password-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.profile-password-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #687384;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.profile-password-field input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 11px;
+  border: 1px solid #e0e5eb;
+  border-radius: 7px;
+  background: #fafbfc;
+  color: #444b55;
+  font: inherit;
+  font-size: 12px;
+}
+
+.profile-password-field input:focus {
+  border-color: #1677ff;
+  outline: 3px solid rgba(22, 119, 255, 0.11);
+}
+
+.profile-password-message {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.profile-password-error {
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.profile-password-success {
+  background: #ecfdf3;
+  color: #027a48;
+}
+
 
 /* ACTIONS */
 
@@ -3743,6 +3802,10 @@ a {
     flex-direction: column;
 
     align-items: flex-start;
+  }
+
+  .profile-password-fields {
+    grid-template-columns: 1fr;
   }
 
   .hero-visual {

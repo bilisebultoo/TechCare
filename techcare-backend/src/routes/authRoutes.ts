@@ -3,6 +3,8 @@ import { Router } from "express";
 import {
   register,
   createAgent,
+  createCustomer,
+  changePassword,
   getActiveAgents,
   login,
   getMe,
@@ -27,6 +29,19 @@ router.post(
   authMiddleware,
   roleMiddleware("ADMIN"),
   createAgent
+);
+
+router.post(
+  "/customers",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  createCustomer
+);
+
+router.post(
+  "/change-password",
+  authMiddleware,
+  changePassword
 );
 
 router.post("/login", login);

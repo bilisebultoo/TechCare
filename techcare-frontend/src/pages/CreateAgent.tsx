@@ -1,20 +1,22 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAuthToken } from "../utils/auth";
 import Sidebar from "../components/Sidebar";
 import "./CreateAgent.css";
 
 function CreateAgent() {
-  const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleCreateAgent(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
+    setSuccess("");
     setLoading(true);
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     try {
       const token = getAuthToken();
@@ -39,10 +41,13 @@ function CreateAgent() {
         throw new Error(data.message || `Unable to create agent (HTTP ${response.status}).`);
       }
 
-      navigate("/admin/agents");
+      form.reset();
+      setSuccess(data.message || "Agent account created successfully.");
     } catch (err) {
       setError(
-        err instanceof Error
+        err instanceof TypeError
+          ? "Cannot reach the TechCare server. Make sure the backend is running, then try again."
+          : err instanceof Error
           ? err.message
           : "Something went wrong while creating the agent account."
       );
@@ -165,7 +170,12 @@ function CreateAgent() {
                 </div>
               </div>
 
-              {error && <p className="create-agent-error" role="alert">{error}</p>}
+              {error && <p className="create-agent-message create-agent-error" role="alert">{error}</p>}
+              {success && (
+                <p className="create-agent-message create-agent-success" role="status">
+                  {success}
+                </p>
+              )}
 
               <div className="create-agent-actions">
                 <Link to="/admin/agents" className="create-agent-cancel">

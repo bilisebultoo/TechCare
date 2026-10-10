@@ -1,5 +1,5 @@
 import CustomerTickets from "../pages/CustomerTickets";
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 
 // ================= PUBLIC =================
 import Home from "../pages/Home";
@@ -30,6 +30,31 @@ import ProblemReports from "../pages/ProblemReports";
 import ProblemReportReview from "../pages/ProblemReportReview";
 import AdminReports from "../pages/AdminReports";
 import AdminSettings from "../pages/AdminSettings";
+import CustomerPasswordChange from "../pages/CustomerPasswordChange";
+
+function customerMustChangePassword(): boolean {
+  try {
+    const user = JSON.parse(sessionStorage.getItem("user") || "null");
+    return user?.mustChangePassword === true;
+  } catch {
+    return false;
+  }
+}
+
+function CustomerPasswordGate() {
+  const location = useLocation();
+  const mustChangePassword = customerMustChangePassword();
+  const isPasswordChangePage = location.pathname === "/customer/change-password";
+
+  if (mustChangePassword && !isPasswordChangePage) {
+    return <Navigate to="/customer/change-password" replace />;
+  }
+  if (!mustChangePassword && isPasswordChangePage) {
+    return <Navigate to="/customer/dashboard" replace />;
+  }
+
+  return <Outlet />;
+}
 
 function AppRoutes() {
   return (
@@ -55,30 +80,36 @@ function AppRoutes() {
 
       {/* ================= CUSTOMER ================= */}
 
-      <Route
-        path="/customer/dashboard"
-        element={<CustomerDashboard />}
-      />
+      <Route element={<CustomerPasswordGate />}>
+        <Route
+          path="/customer/change-password"
+          element={<CustomerPasswordChange />}
+        />
+        <Route
+          path="/customer/dashboard"
+          element={<CustomerDashboard />}
+        />
 
-      <Route
-        path="/customer/tickets"
-        element={<CustomerTickets />}
-      />
+        <Route
+          path="/customer/tickets"
+          element={<CustomerTickets />}
+        />
 
-      <Route
-        path="/customer/tickets/:id"
-        element={<CustomerTicketDetails />}
-      />
+        <Route
+          path="/customer/tickets/:id"
+          element={<CustomerTicketDetails />}
+        />
 
-      <Route
-        path="/customer/report-problem"
-        element={<ReportProblem />}
-      />
+        <Route
+          path="/customer/report-problem"
+          element={<ReportProblem />}
+        />
 
-      <Route
-        path="/customer/profile"
-        element={<CustomerProfile />}
-      />
+        <Route
+          path="/customer/profile"
+          element={<CustomerProfile />}
+        />
+      </Route>
 
 
       {/* ================= AGENT ================= */}

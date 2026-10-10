@@ -6,6 +6,7 @@ export interface AuthRequest extends Request {
   user?: {
     id: string;
     role: string;
+    mustChangePassword: boolean;
   };
 }
 
@@ -61,7 +62,9 @@ export const authMiddleware = async (
   }
 
   try {
-    const user = await User.findById(decoded.userId).select("role isActive");
+    const user = await User.findById(decoded.userId).select(
+      "role isActive mustChangePassword"
+    );
     if (!user) {
       res.status(401).json({ message: "The account for this session no longer exists." });
       return;
@@ -71,9 +74,21 @@ export const authMiddleware = async (
       return;
     }
 
+    if (
+      user.mustChangePassword &&
+      (req.method !== "POST" || req.path !== "/change-password")
+    ) {
+      res.status(403).json({
+        message: "Change your temporary password before using your account.",
+        mustChangePassword: true,
+      });
+      return;
+    }
+
     req.user = {
       id: user._id.toString(),
       role: user.role,
+      mustChangePassword: user.mustChangePassword,
     };
     next();
   } catch (error) {

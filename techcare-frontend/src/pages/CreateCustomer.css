@@ -139,6 +139,10 @@
   box-shadow: 0 0 0 3px rgba(68, 133, 245, 0.14);
 }
 
+.create-customer-password {
+  max-width: 50%;
+}
+
 .create-customer-note {
   display: flex;
   align-items: flex-start;
@@ -172,6 +176,24 @@
   color: #718096;
   font-size: 12px;
   line-height: 1.6;
+}
+
+.create-customer-message {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.create-customer-error {
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.create-customer-success {
+  background: #ecfdf3;
+  color: #027a48;
 }
 
 .create-customer-actions {
@@ -211,6 +233,11 @@
   background: #1d4ed8;
 }
 
+.create-customer-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
 .create-customer-cancel:hover {
   background: #f8faff;
 }
@@ -225,6 +252,10 @@
   .create-customer-fields {
     grid-template-columns: 1fr;
     gap: 17px;
+  }
+
+  .create-customer-password {
+    max-width: none;
   }
 }
 

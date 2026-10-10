@@ -51,7 +51,11 @@ function Login() {
       } else if (data.user.role === "AGENT") {
         navigate("/agent/dashboard");
       } else if (data.user.role === "CUSTOMER") {
-        navigate("/customer/dashboard");
+        navigate(
+          data.user.mustChangePassword
+            ? "/customer/change-password"
+            : "/customer/dashboard"
+        );
       } else {
         clearAuthToken();
         throw new Error("Unknown account role.");

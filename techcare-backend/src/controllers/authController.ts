@@ -192,6 +192,84 @@ export const createAgent = async (
   }
 };
 
+export const createCustomer = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const { name, email, phone, password, isActive } = req.body;
+
+    if (
+      typeof name !== "string" ||
+      !name.trim() ||
+      typeof email !== "string" ||
+      !email.trim() ||
+      typeof phone !== "string" ||
+      !phone.trim() ||
+      typeof password !== "string" ||
+      !password
+    ) {
+      res.status(400).json({
+        message: "Please provide name, email, phone and an initial password.",
+      });
+      return;
+    }
+
+    const normalizedPhone = phone.trim();
+    if (!isValidPhoneNumber(normalizedPhone)) {
+      res.status(400).json({
+        message: "Please enter a valid phone number with 7 to 15 digits.",
+      });
+      return;
+    }
+
+    if (password.length < 8) {
+      res.status(400).json({
+        message: "The customer password must be at least 8 characters.",
+      });
+      return;
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const existingUser = await User.findOne({ email: normalizedEmail });
+
+    if (existingUser) {
+      res.status(409).json({
+        message: "An account with this email already exists.",
+      });
+      return;
+    }
+
+    const customer = await User.create({
+      name: name.trim(),
+      email: normalizedEmail,
+      phone: normalizedPhone,
+      password: await bcrypt.hash(password, 10),
+      role: "CUSTOMER",
+      isActive: isActive !== false,
+      mustChangePassword: true,
+    });
+
+    res.status(201).json({
+      message: "Customer account created successfully.",
+      user: {
+        id: customer._id,
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        role: customer.role,
+        isActive: customer.isActive,
+      },
+    });
+  } catch (error) {
+    console.error("Create customer error:", error);
+
+    res.status(500).json({
+      message: "Server error while creating customer account.",
+    });
+  }
+};
+
 export const getActiveAgents = async (
   _req: AuthRequest,
   res: Response
@@ -279,6 +357,7 @@ export const login = async (
         email: user.email,
         phone: user.phone,
         role: user.role,
+        mustChangePassword: user.mustChangePassword,
       },
     });
   } catch (error) {
@@ -290,6 +369,89 @@ export const login = async (
     });
   }
 };
+
+export const changePassword = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (
+      typeof currentPassword !== "string" ||
+      !currentPassword ||
+      typeof newPassword !== "string" ||
+      !newPassword
+    ) {
+      res.status(400).json({
+        message: "Please provide your current password and a new password.",
+      });
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      res.status(400).json({
+        message: "Your new password must be at least 8 characters.",
+      });
+      return;
+    }
+
+    if (!req.user) {
+      res.status(401).json({
+        message: "Authentication required.",
+      });
+      return;
+    }
+
+    if (req.user.role !== "CUSTOMER" && req.user.role !== "AGENT") {
+      res.status(403).json({
+        message: "Only customers and agents can change their password here.",
+      });
+      return;
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      res.status(404).json({
+        message: "User not found.",
+      });
+      return;
+    }
+
+    const currentPasswordMatches = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+    if (!currentPasswordMatches) {
+      res.status(400).json({
+        message: "Your current password is incorrect.",
+      });
+      return;
+    }
+
+    if (currentPassword === newPassword) {
+      res.status(400).json({
+        message: "Your new password must be different from your current password.",
+      });
+      return;
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+    user.mustChangePassword = false;
+    await user.save();
+
+    res.status(200).json({
+      message: "Your password has been changed successfully.",
+    });
+  } catch (error) {
+    console.error("Change password error:", error);
+
+    res.status(500).json({
+      message: "Server error while changing your password.",
+    });
+  }
+};
+
 export const getMe = async (
   req: AuthRequest,
   res: Response
@@ -321,6 +483,7 @@ export const getMe = async (
         phone: user.phone,
         role: user.role,
         isActive: user.isActive,
+        mustChangePassword: user.mustChangePassword,
       },
     });
   } catch (error) {
