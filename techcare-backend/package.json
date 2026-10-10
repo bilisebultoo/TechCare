@@ -4,10 +4,12 @@
   "description": "TechCare hardware customer support backend",
   "main": "dist/server.js",
   "scripts": {
-  "dev": "tsx watch src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js"
-},
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "admin:create": "tsx scripts/createAdmin.ts",
+    "admin:update": "tsx scripts/updateAdmin.ts"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.0",
     "cors": "^2.8.5",

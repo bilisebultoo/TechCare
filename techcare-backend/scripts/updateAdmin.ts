@@ -48,7 +48,6 @@ async function updateAdmin(): Promise<void> {
     await admin.save();
 
     console.log("Admin account updated successfully.");
-    console.log("Admin email:", admin.email);
     console.log("Role:", admin.role);
   } catch (error) {
     console.error("Admin update failed:", error);

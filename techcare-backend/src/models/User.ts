@@ -9,6 +9,7 @@ export interface IUser extends Document {
   password: string;
   role: UserRole;
   isActive: boolean;
+  specialization?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -50,6 +51,11 @@ const userSchema = new Schema<IUser>(
     isActive: {
       type: Boolean,
       default: true,
+    },
+
+    specialization: {
+      type: String,
+      trim: true,
     },
   },
   {

@@ -18,7 +18,7 @@ export const roleMiddleware = (
 
     if (req.user.role !== requiredRole) {
       res.status(403).json({
-        message: "Access denied. You do not have permission.",
+        message: `This action requires an ${requiredRole.toLowerCase()} account. The current account role is ${req.user.role.toLowerCase()}.`,
       });
       return;
     }

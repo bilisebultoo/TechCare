@@ -6,6 +6,7 @@ import {
   getAllProblemReports,
   getProblemReportById,
   updateProblemReportStatus,
+  assignProblemReport,
 } from "../controllers/problemReportController";
 
 import { authMiddleware } from "../middleware/authMiddleware";
@@ -61,6 +62,13 @@ router.patch(
   authMiddleware,
   roleMiddleware("ADMIN"),
   updateProblemReportStatus
+);
+
+router.post(
+  "/:id/assign",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  assignProblemReport
 );
 
 

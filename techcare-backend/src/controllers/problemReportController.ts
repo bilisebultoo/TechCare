@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
+import mongoose from "mongoose";
 import { AuthRequest } from "../middleware/authMiddleware";
 import ProblemReport from "../models/ProblemReport";
+import Ticket from "../models/Ticket";
+import User from "../models/User";
 
 
 // ==========================================
@@ -91,9 +94,22 @@ export const getMyProblemReports = async (
       createdAt: -1,
     });
 
+    const tickets = await Ticket.find({
+      sourceReportId: { $in: reports.map((report) => report._id) },
+      customerId: req.user.id,
+    })
+      .select("_id sourceReportId")
+      .lean();
+    const ticketIdByReportId = new Map(
+      tickets.map((ticket) => [String(ticket.sourceReportId), String(ticket._id)])
+    );
+
     res.status(200).json({
       count: reports.length,
-      problemReports: reports,
+      problemReports: reports.map((report) => ({
+        ...report.toObject(),
+        ticketId: ticketIdByReportId.get(String(report._id)),
+      })),
     });
   } catch (error) {
     console.error("Get my problem reports error:", error);
@@ -187,16 +203,11 @@ export const updateProblemReportStatus = async (
     const { id } = req.params;
     const { status } = req.body;
 
-    const allowedStatuses = [
-      "PENDING",
-      "REVIEWED",
-      "CONVERTED",
-    ];
+    const allowedStatuses = ["PENDING", "REVIEWED"];
 
     if (!allowedStatuses.includes(status)) {
       res.status(400).json({
-        message:
-          "Invalid status. Use PENDING, REVIEWED or CONVERTED.",
+        message: "Invalid status. Reports can be marked PENDING or REVIEWED; assign the report to create a ticket.",
       });
       return;
     }
@@ -232,6 +243,89 @@ export const updateProblemReportStatus = async (
     res.status(500).json({
       message:
         "Server error while updating problem report status.",
+    });
+  }
+};
+
+export const assignProblemReport = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const { agentId } = req.body;
+
+    if (!mongoose.isValidObjectId(id) || !mongoose.isValidObjectId(agentId)) {
+      res.status(400).json({ message: "A valid report and agent are required." });
+      return;
+    }
+
+    const report = await ProblemReport.findById(id);
+    if (!report) {
+      res.status(404).json({ message: "Problem report not found." });
+      return;
+    }
+
+    const existingTicket = await Ticket.findOne({ sourceReportId: report._id });
+    if (existingTicket) {
+      res.status(409).json({
+        message: "This problem report has already been converted into a ticket.",
+      });
+      return;
+    }
+
+    const agent = await User.findOne({
+      _id: agentId,
+      role: "AGENT",
+      isActive: true,
+    });
+    if (!agent) {
+      res.status(400).json({ message: "Select an active support agent." });
+      return;
+    }
+
+    const ticket = await Ticket.create({
+      title: report.problem,
+      description: report.description,
+      status: "OPEN",
+      priority: "MEDIUM",
+      customerId: report.customerId,
+      agentId: agent._id,
+      sourceReportId: report._id,
+      deviceType: report.deviceType,
+      brand: report.brand,
+      model: report.model,
+    });
+
+    report.status = "CONVERTED";
+    await report.save();
+
+    res.status(201).json({
+      message: "Problem report assigned and converted to a ticket.",
+      ticket: {
+        ...ticket.toObject(),
+        agent: {
+          id: agent._id,
+          name: agent.name,
+          email: agent.email,
+        },
+      },
+      problemReport: report,
+    });
+  } catch (error) {
+    if (
+      error instanceof mongoose.mongo.MongoServerError &&
+      error.code === 11000
+    ) {
+      res.status(409).json({
+        message: "This problem report has already been assigned.",
+      });
+      return;
+    }
+
+    console.error("Assign problem report error:", error);
+    res.status(500).json({
+      message: "Server error while assigning problem report.",
     });
   }
 };
