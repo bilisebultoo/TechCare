@@ -1,0 +1,3 @@
+[submodule "techcare-frontend"]
+	path = techcare-frontend
+	url = https://github.com/bilisebultoo/techcare-frontend.git
