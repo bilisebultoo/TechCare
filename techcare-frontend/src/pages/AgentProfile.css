@@ -1,0 +1,29 @@
+.profile-loading,
+.profile-load-error {
+  max-width: 670px;
+  margin: 18px auto;
+  padding: 16px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.profile-loading {
+  border: 1px solid #e7ebf0;
+  background: #fff;
+  color: #667085;
+  text-align: center;
+}
+
+.profile-load-error {
+  border: 1px solid #ffcaca;
+  background: #fff1f1;
+  color: #b42318;
+}
+
+.profile-load-error p {
+  margin: 0 0 5px;
+}
+
+.profile-load-error a {
+  color: #175cd3;
+}

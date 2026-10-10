@@ -1,0 +1,14 @@
+.report-submit-error {
+  margin: 0 0 14px;
+  padding: 11px 13px;
+  border: 1px solid #ffcaca;
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.submit-problem-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}

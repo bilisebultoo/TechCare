@@ -1,0 +1,170 @@
+.admin-settings-page {
+  min-height: 100vh;
+  background: #f7f9fc;
+}
+
+.admin-settings-main {
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  margin-left: 250px;
+  padding: 30px;
+  box-sizing: border-box;
+  color: #172b4d;
+}
+
+.as-header {
+  margin-bottom: 27px;
+}
+
+.as-eyebrow {
+  color: #1677ff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.as-header h1 {
+  margin: 10px 0 6px;
+  font-size: 29px;
+}
+
+.as-header p,
+.as-panel-heading p {
+  margin: 0;
+  color: #8491a5;
+  font-size: 14px;
+}
+
+.as-panel {
+  margin-bottom: 18px;
+  padding: 22px 23px;
+  border: 1px solid #edf0f5;
+  border-radius: 14px;
+  background: white;
+}
+
+.as-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 19px;
+}
+
+.as-heading-icon,
+.as-action-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: #eaf2ff;
+  color: #1677ff;
+}
+
+.as-panel-heading h2 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.as-detail {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 0;
+  border-top: 1px solid #edf0f5;
+  font-size: 14px;
+}
+
+.as-detail span,
+.as-action-copy span {
+  color: #8491a5;
+}
+
+.as-detail strong {
+  color: #344054;
+}
+
+.as-detail .as-session-active {
+  color: #16835d;
+}
+
+.as-detail .as-session-inactive {
+  color: #b76e00;
+}
+
+.as-action-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 17px;
+  border-top: 1px solid #edf0f5;
+}
+
+.as-action-icon {
+  background: #fff1f1;
+  color: #b42318;
+}
+
+.as-action-copy {
+  display: grid;
+  flex: 1;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.as-action-copy strong {
+  color: #344054;
+}
+
+.as-action-copy span {
+  font-size: 13px;
+}
+
+.as-logout,
+.as-workspace-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border: 1px solid #dce4ef;
+  border-radius: 9px;
+  background: white;
+  color: #344054;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.as-logout {
+  border-color: #f0c9c9;
+  color: #b42318;
+}
+
+.as-workspace-link {
+  border: 0;
+  padding: 0;
+  color: #1677ff;
+}
+
+@media (max-width: 768px) {
+  .admin-settings-main {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+    padding: 18px;
+  }
+
+  .as-action-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .as-action-copy {
+    min-width: calc(100% - 60px);
+  }
+
+  .as-logout {
+    margin-left: 56px;
+  }
+}

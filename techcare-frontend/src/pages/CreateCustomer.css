@@ -1,0 +1,251 @@
+.create-customer-page {
+  min-height: 100vh;
+  background: #f7f9fc;
+  color: #172b4d;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.create-customer-page *,
+.create-customer-page *::before,
+.create-customer-page *::after {
+  box-sizing: border-box;
+}
+
+.create-customer-main {
+  width: calc(100% - 214px);
+  min-height: 100vh;
+  margin-left: 214px;
+  padding: 34px;
+}
+
+.create-customer-header {
+  margin: 0 auto 27px;
+  max-width: 1040px;
+}
+
+.create-customer-eyebrow {
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.2px;
+}
+
+.create-customer-header h1 {
+  margin: 9px 0 6px;
+  color: #172b4d;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.create-customer-header p {
+  margin: 0;
+  color: #8491a5;
+  font-size: 14px;
+}
+
+.create-customer-content {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.create-customer-card {
+  overflow: hidden;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(23, 43, 77, 0.04);
+}
+
+.create-customer-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 23px 26px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.create-customer-card-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 11px;
+  background: #eaf2ff;
+  color: #1677ff;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.create-customer-card-header h2 {
+  margin: 0 0 5px;
+  color: #26354d;
+  font-size: 17px;
+}
+
+.create-customer-card-header p {
+  margin: 0;
+  color: #8491a5;
+  font-size: 13px;
+}
+
+.create-customer-form {
+  display: grid;
+  gap: 23px;
+  padding: 26px;
+}
+
+.create-customer-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.create-customer-field {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.create-customer-field label {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.create-customer-field input,
+.create-customer-field select {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 13px;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #172b4d;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.create-customer-field input::placeholder {
+  color: #a0aabb;
+}
+
+.create-customer-field input:focus,
+.create-customer-field select:focus {
+  border-color: #4485f5;
+  box-shadow: 0 0 0 3px rgba(68, 133, 245, 0.14);
+}
+
+.create-customer-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid #dce9ff;
+  border-radius: 10px;
+  background: #f5f8ff;
+}
+
+.create-customer-note > span {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #e1ecff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.create-customer-note strong {
+  color: #344b73;
+  font-size: 13px;
+}
+
+.create-customer-note p {
+  margin: 5px 0 0;
+  color: #718096;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.create-customer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 11px;
+  padding-top: 19px;
+  border-top: 1px solid #edf0f5;
+}
+
+.create-customer-cancel,
+.create-customer-submit {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 17px;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  background: #fff;
+  color: #475467;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.create-customer-submit {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+
+.create-customer-submit:hover {
+  border-color: #1d4ed8;
+  background: #1d4ed8;
+}
+
+.create-customer-cancel:hover {
+  background: #f8faff;
+}
+
+@media (max-width: 768px) {
+  .create-customer-main {
+    width: calc(100% - 214px);
+    margin-left: 214px;
+    padding: 22px 18px;
+  }
+
+  .create-customer-fields {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+}
+
+@media (max-width: 520px) {
+  .create-customer-main {
+    width: calc(100% - 64px);
+    margin-left: 64px;
+    padding: 18px 14px;
+  }
+
+  .create-customer-card-header,
+  .create-customer-form {
+    padding: 18px;
+  }
+
+  .create-customer-actions {
+    flex-direction: column-reverse;
+  }
+
+  .create-customer-cancel,
+  .create-customer-submit {
+    width: 100%;
+  }
+}
