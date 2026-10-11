@@ -8,6 +8,7 @@ import {
   getActiveAgents,
   login,
   getMe,
+  updateAgentSpecialization,
 } from "../controllers/authController";
 
 import { authMiddleware } from "../middleware/authMiddleware";
@@ -47,5 +48,12 @@ router.post(
 router.post("/login", login);
 
 router.get("/me", authMiddleware, getMe);
+
+router.put(
+  "/specialization",
+  authMiddleware,
+  roleMiddleware("AGENT"),
+  updateAgentSpecialization
+);
 
 export default router;

@@ -24,6 +24,8 @@ type ProblemReport = {
   description?: string;
   status?: ReportStatus;
   createdAt?: string;
+  ticketId?: string;
+  assignedAgent?: Pick<Agent, "id" | "name" | "email" | "specialization"> | null;
 };
 
 type Agent = {
@@ -201,8 +203,20 @@ function ProblemReportReview() {
         throw new Error(data.message || `Unable to assign report (HTTP ${response.status}).`);
       }
 
-      setReport((current) => current ? { ...current, ...(data.problemReport ?? { status: "CONVERTED" }) } : current);
       const assignedAgent = agents.find((agent) => agent.id === selectedAgentId);
+      setReport((current) => current ? {
+        ...current,
+        ...(data.problemReport ?? { status: "CONVERTED" }),
+        ticketId: data.ticket?._id,
+        assignedAgent: data.ticket?.agent ?? (assignedAgent
+          ? {
+              id: assignedAgent.id,
+              name: assignedAgent.name,
+              email: assignedAgent.email,
+              specialization: assignedAgent.specialization,
+            }
+          : null),
+      } : current);
       setNotice(`Ticket assigned to ${assignedAgent?.name ?? "the selected agent"}.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong while assigning the report.");
@@ -345,7 +359,20 @@ function ProblemReportReview() {
                     </div>
                   </div>
                   {status === "CONVERTED" ? (
-                    <p className="pvr-assignment-complete">This report has already been converted into a ticket.</p>
+                    <div className="pvr-assignment-details">
+                      <p className="pvr-assignment-complete">
+                        This report has already been converted into a ticket.
+                      </p>
+                      <div className="pvr-assigned-agent">
+                        <span>Assigned agent</span>
+                        <strong>{report.assignedAgent?.name || "No agent information available"}</strong>
+                        {report.assignedAgent?.email && (
+                          <span>{report.assignedAgent.email}</span>
+                        )}
+                        <span>Specialization</span>
+                        <strong>{report.assignedAgent?.specialization || "Not specified"}</strong>
+                      </div>
+                    </div>
                   ) : (
                     <>
                       <label className="pvr-agent-label" htmlFor="pvr-agent">
@@ -363,7 +390,7 @@ function ProblemReportReview() {
                         </option>
                         {agents.map((agent) => (
                           <option key={agent.id} value={agent.id}>
-                            {agent.name} ({agent.email})
+                            {agent.name} - {agent.specialization || "Specialization not specified"} ({agent.email})
                           </option>
                         ))}
                       </select>

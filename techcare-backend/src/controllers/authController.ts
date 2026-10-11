@@ -482,6 +482,7 @@ export const getMe = async (
         email: user.email,
         phone: user.phone,
         role: user.role,
+        specialization: user.specialization,
         isActive: user.isActive,
         mustChangePassword: user.mustChangePassword,
       },
@@ -491,6 +492,54 @@ export const getMe = async (
 
     res.status(500).json({
       message: "Server error.",
+    });
+  }
+};
+
+export const updateAgentSpecialization = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required." });
+      return;
+    }
+
+    if (req.user.role !== "AGENT") {
+      res.status(403).json({ message: "Only agents can update their specialization." });
+      return;
+    }
+
+    const { specialization } = req.body;
+    if (
+      typeof specialization !== "string" ||
+      !specialization.trim() ||
+      specialization.trim().length > 100
+    ) {
+      res.status(400).json({
+        message: "Choose a specialization of 1 to 100 characters.",
+      });
+      return;
+    }
+
+    const agent = await User.findOne({ _id: req.user.id, role: "AGENT" });
+    if (!agent) {
+      res.status(404).json({ message: "Agent account not found." });
+      return;
+    }
+
+    agent.specialization = specialization.trim();
+    await agent.save();
+
+    res.status(200).json({
+      message: "Your specialization has been updated.",
+      specialization: agent.specialization,
+    });
+  } catch (error) {
+    console.error("Update agent specialization error:", error);
+    res.status(500).json({
+      message: "Server error while updating your specialization.",
     });
   }
 };

@@ -177,8 +177,26 @@ export const getProblemReportById = async (
       return;
     }
 
+    const ticket = await Ticket.findOne({ sourceReportId: report._id }).select(
+      "_id agentId"
+    );
+    const assignedAgent = ticket?.agentId
+      ? await User.findById(ticket.agentId).select("name email specialization")
+      : null;
+
     res.status(200).json({
-      problemReport: report,
+      problemReport: {
+        ...report.toObject(),
+        ticketId: ticket?._id.toString(),
+        assignedAgent: assignedAgent
+          ? {
+              id: assignedAgent._id.toString(),
+              name: assignedAgent.name,
+              email: assignedAgent.email,
+              specialization: assignedAgent.specialization,
+            }
+          : null,
+      },
     });
   } catch (error) {
     console.error("Get problem report error:", error);
@@ -308,6 +326,7 @@ export const assignProblemReport = async (
           id: agent._id,
           name: agent.name,
           email: agent.email,
+          specialization: agent.specialization,
         },
       },
       problemReport: report,

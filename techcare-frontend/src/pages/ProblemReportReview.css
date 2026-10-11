@@ -326,6 +326,30 @@
   line-height: 1.6;
 }
 
+.pvr-assignment-details {
+  display: grid;
+  gap: 14px;
+}
+
+.pvr-assigned-agent {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border: 1px solid #e5eaf1;
+  border-radius: 9px;
+  background: #f9fbfe;
+}
+
+.pvr-assigned-agent span {
+  color: #8491a5;
+  font-size: 11px;
+}
+
+.pvr-assigned-agent strong {
+  color: #344054;
+  font-size: 13px;
+}
+
 .pvr-secure-note {
   display: flex;
   align-items: flex-start;

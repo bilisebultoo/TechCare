@@ -27,3 +27,26 @@
 .profile-load-error a {
   color: #175cd3;
 }
+
+.agent-specialization-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.agent-specialization-form select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 11px;
+  border: 1px solid #e0e5eb;
+  border-radius: 7px;
+  background: #fafbfc;
+  color: #444b55;
+  font: inherit;
+  font-size: 12px;
+}
+
+.agent-specialization-form select:focus {
+  border-color: #1677ff;
+  outline: 3px solid rgba(22, 119, 255, 0.11);
+}

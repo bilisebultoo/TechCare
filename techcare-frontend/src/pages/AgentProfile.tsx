@@ -8,18 +8,83 @@ type AgentUser = {
   email: string;
   phone?: string;
   role: string;
+  specialization?: string;
 };
+
+const SPECIALIZATIONS = [
+  "Hardware Support",
+  "Laptop & Desktop",
+  "Printer Support",
+  "Mobile Devices",
+  "Network & Router",
+  "Other",
+];
 
 function AgentProfile() {
   const [user, setUser] = useState<AgentUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [specializationError, setSpecializationError] = useState("");
+  const [specializationSuccess, setSpecializationSuccess] = useState("");
+  const [specializationLoading, setSpecializationLoading] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordSuccess, setPasswordSuccess] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
+
+  async function handleSpecializationSave(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSpecializationError("");
+    setSpecializationSuccess("");
+
+    const token = getAuthToken();
+    if (!token) {
+      setSpecializationError("Your session has expired. Please sign in again.");
+      return;
+    }
+
+    setSpecializationLoading(true);
+    try {
+      const response = await fetch("/api/auth/specialization", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ specialization }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || `Unable to update specialization (HTTP ${response.status}).`
+        );
+      }
+
+      if (!user) {
+        throw new Error("Your profile information is unavailable. Please reload the page.");
+      }
+
+      const updatedUser = { ...user, specialization: data.specialization };
+      setUser(updatedUser);
+      setSpecialization(data.specialization);
+      sessionStorage.setItem("user", JSON.stringify(updatedUser));
+      setSpecializationSuccess(data.message || "Your specialization has been updated.");
+    } catch (err) {
+      setSpecializationError(
+        err instanceof TypeError
+          ? "Cannot reach the TechCare server. Check that it is running and try again."
+          : err instanceof Error
+            ? err.message
+            : "Something went wrong while updating your specialization."
+      );
+    } finally {
+      setSpecializationLoading(false);
+    }
+  }
 
   async function handlePasswordChange(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -100,6 +165,7 @@ function AgentProfile() {
       .then((profile) => {
         if (!active) return;
         setUser(profile);
+        setSpecialization(profile.specialization || "");
         sessionStorage.setItem("user", JSON.stringify(profile));
       })
       .catch((err: unknown) => {
@@ -193,6 +259,39 @@ function AgentProfile() {
                   <div className="profile-value">Agent</div>
                 </div>
               </div>
+              <form className="agent-specialization-form" onSubmit={handleSpecializationSave}>
+                <div className="profile-password-field">
+                  <label htmlFor="agent-profile-specialization">Specialization</label>
+                  <select
+                    id="agent-profile-specialization"
+                    value={specialization}
+                    onChange={(event) => setSpecialization(event.target.value)}
+                    required
+                  >
+                    <option value="" disabled>Select your specialization</option>
+                    {SPECIALIZATIONS.map((value) => (
+                      <option key={value} value={value}>{value}</option>
+                    ))}
+                  </select>
+                </div>
+                {specializationError && (
+                  <p className="profile-password-message profile-password-error" role="alert">
+                    {specializationError}
+                  </p>
+                )}
+                {specializationSuccess && (
+                  <p className="profile-password-message profile-password-success" role="status">
+                    {specializationSuccess}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  className="change-password-btn"
+                  disabled={specializationLoading || !specialization}
+                >
+                  {specializationLoading ? "Saving..." : "Save Specialization"}
+                </button>
+              </form>
             </div>
 
             <div className="profile-section">
