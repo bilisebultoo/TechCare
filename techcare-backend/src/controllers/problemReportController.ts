@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
+import { basename, resolve } from "path";
 import { AuthRequest } from "../middleware/authMiddleware";
 import ProblemReport from "../models/ProblemReport";
 import Ticket from "../models/Ticket";
@@ -31,6 +32,7 @@ export const createProblemReport = async (
       problem,
       description,
     } = req.body;
+    const uploadedFiles = Array.isArray(req.files) ? req.files : [];
 
     // Required fields
     if (
@@ -54,6 +56,12 @@ export const createProblemReport = async (
       serialNumber,
       problem,
       description,
+      attachments: uploadedFiles.map((file) => ({
+        filename: file.filename,
+        originalName: file.originalname,
+        mimeType: file.mimetype,
+        size: file.size,
+      })),
       status: "PENDING",
     });
 
@@ -139,10 +147,25 @@ export const getAllProblemReports = async (
       .sort({
         createdAt: -1,
       });
+    const tickets = await Ticket.find({
+      sourceReportId: { $in: reports.map((report) => report._id) },
+    })
+      .select("sourceReportId priority status")
+      .lean();
+    const ticketByReportId = new Map(
+      tickets.map((ticket) => [
+        String(ticket.sourceReportId),
+        { priority: ticket.priority, status: ticket.status },
+      ])
+    );
 
     res.status(200).json({
       count: reports.length,
-      problemReports: reports,
+      problemReports: reports.map((report) => ({
+        ...report.toObject(),
+        ticketPriority: ticketByReportId.get(String(report._id))?.priority,
+        ticketStatus: ticketByReportId.get(String(report._id))?.status,
+      })),
     });
   } catch (error) {
     console.error("Get all problem reports error:", error);
@@ -178,7 +201,7 @@ export const getProblemReportById = async (
     }
 
     const ticket = await Ticket.findOne({ sourceReportId: report._id }).select(
-      "_id agentId"
+      "_id agentId priority status"
     );
     const assignedAgent = ticket?.agentId
       ? await User.findById(ticket.agentId).select("name email specialization")
@@ -188,6 +211,8 @@ export const getProblemReportById = async (
       problemReport: {
         ...report.toObject(),
         ticketId: ticket?._id.toString(),
+        ticketPriority: ticket?.priority,
+        ticketStatus: ticket?.status,
         assignedAgent: assignedAgent
           ? {
               id: assignedAgent._id.toString(),
@@ -204,6 +229,78 @@ export const getProblemReportById = async (
     res.status(500).json({
       message: "Server error while getting problem report.",
     });
+  }
+};
+
+export const getProblemReportAttachment = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    if (!req.user || !["ADMIN", "AGENT"].includes(req.user.role)) {
+      res.status(403).json({ message: "Access denied." });
+      return;
+    }
+    if (
+      !mongoose.isValidObjectId(req.params.id) ||
+      !mongoose.isValidObjectId(req.params.attachmentId)
+    ) {
+      res.status(400).json({ message: "Invalid report or attachment ID." });
+      return;
+    }
+
+    const report = await ProblemReport.findById(req.params.id).select(
+      "attachments"
+    );
+    if (!report) {
+      res.status(404).json({ message: "Problem report not found." });
+      return;
+    }
+
+    const attachment = report.attachments.find(
+      (item) => String(item._id) === req.params.attachmentId
+    );
+    if (!attachment || basename(attachment.filename) !== attachment.filename) {
+      res.status(404).json({ message: "Attachment not found." });
+      return;
+    }
+
+    if (req.user.role === "AGENT") {
+      const assignedTicket = await Ticket.exists({
+        sourceReportId: report._id,
+        agentId: req.user.id,
+      });
+      if (!assignedTicket) {
+        res.status(403).json({ message: "This report is not assigned to you." });
+        return;
+      }
+    }
+
+    const originalName = attachment.originalName.replace(/["\\\r\n]/g, "_");
+    res.setHeader("Cache-Control", "private, no-store");
+    res.setHeader("Content-Type", attachment.mimeType);
+    res.setHeader("Content-Disposition", `inline; filename="${originalName}"`);
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.sendFile(
+      resolve(__dirname, "../../uploads", attachment.filename),
+      (error) => {
+        if (error) {
+          console.error("Serve problem report attachment error:", error);
+          if (!res.headersSent) {
+            const isMissing = "code" in error && error.code === "ENOENT";
+            res.status(isMissing ? 404 : 500).json({
+              message:
+                isMissing
+                  ? "Attachment file not found."
+                  : "Unable to load the attachment.",
+            });
+          }
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Get problem report attachment error:", error);
+    res.status(500).json({ message: "Unable to load the attachment." });
   }
 };
 
@@ -271,10 +368,14 @@ export const assignProblemReport = async (
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const { agentId } = req.body;
+    const { agentId, priority } = req.body;
 
     if (!mongoose.isValidObjectId(id) || !mongoose.isValidObjectId(agentId)) {
       res.status(400).json({ message: "A valid report and agent are required." });
+      return;
+    }
+    if (!["LOW", "MEDIUM", "HIGH"].includes(priority)) {
+      res.status(400).json({ message: "Select a valid ticket priority." });
       return;
     }
 
@@ -306,7 +407,7 @@ export const assignProblemReport = async (
       title: report.problem,
       description: report.description,
       status: "OPEN",
-      priority: "MEDIUM",
+      priority,
       customerId: report.customerId,
       agentId: agent._id,
       sourceReportId: report._id,

@@ -1,0 +1,14 @@
+{
+  "name": "techcare",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others --names API,WEB \"npm run dev --prefix techcare-backend\" \"npm run dev --prefix techcare-frontend\"",
+    "dev:backend": "npm run dev --prefix techcare-backend",
+    "dev:frontend": "npm run dev --prefix techcare-frontend",
+    "build": "npm run build --prefix techcare-backend && npm run build --prefix techcare-frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

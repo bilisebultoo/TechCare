@@ -5,11 +5,13 @@ import {
   getMyProblemReports,
   getAllProblemReports,
   getProblemReportById,
+  getProblemReportAttachment,
   updateProblemReportStatus,
   assignProblemReport,
 } from "../controllers/problemReportController";
 
 import { authMiddleware } from "../middleware/authMiddleware";
+import { uploadProblemReportAttachments } from "../middleware/problemReportUpload";
 import { roleMiddleware } from "../middleware/roleMiddleware";
 
 const router = Router();
@@ -24,6 +26,7 @@ router.post(
   "/",
   authMiddleware,
   roleMiddleware("CUSTOMER"),
+  uploadProblemReportAttachments,
   createProblemReport
 );
 
@@ -49,6 +52,12 @@ router.get(
 );
 
 // Admin sees one problem report
+router.get(
+  "/:id/attachments/:attachmentId",
+  authMiddleware,
+  getProblemReportAttachment
+);
+
 router.get(
   "/:id",
   authMiddleware,

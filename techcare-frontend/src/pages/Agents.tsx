@@ -1,6 +1,6 @@
 
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { clearAuthToken } from "../utils/auth";
 import {
   LayoutDashboard,
@@ -12,6 +12,9 @@ import {
   Settings,
   LogOut,
   Search,
+  ArrowLeft,
+  Mail,
+  Phone,
   Bell,
   Plus,
   ChevronRight,
@@ -98,6 +101,7 @@ function getSpecializationIcon(specialization: string) {
 }
 
 function Agents() {
+  const { id: agentId } = useParams();
   const [agents] = useState<Agent[]>(initialAgents);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
@@ -132,6 +136,9 @@ function Agents() {
   const totalTickets = agents.reduce(
     (total, agent) => total + agent.tickets,
     0
+  );
+  const selectedAgent = agents.find(
+    (agent) => String(agent.id) === agentId
   );
 
   const handleLogout = () => {
@@ -273,7 +280,7 @@ function Agents() {
             <div className="tc-ag-breadcrumb">
               <span>Workspace</span>
               <ChevronRight size={15} />
-              <strong>Support Agents</strong>
+              <strong>{agentId ? "Agent Details" : "Support Agents"}</strong>
             </div>
           </div>
 
@@ -304,6 +311,148 @@ function Agents() {
         </header>
 
         <div className="tc-ag-content">
+          {agentId ? (
+            <>
+              <section className="tc-ag-heading tc-ag-profile-heading">
+                <div>
+                  <div className="tc-ag-eyebrow">
+                    <span />
+                    TEAM MANAGEMENT
+                  </div>
+                  <h1>Agent profile</h1>
+                  <p>
+                    {selectedAgent
+                      ? "View this support agent's contact details, expertise, and workload."
+                      : "This agent is not available in the team directory."}
+                  </p>
+                </div>
+                <Link to="/admin/agents" className="tc-ag-profile-back">
+                  <ArrowLeft size={18} />
+                  Back to agents
+                </Link>
+              </section>
+
+              {selectedAgent ? (
+                <div className="tc-ag-profile-layout">
+                  <section className="tc-ag-profile-card">
+                    <div className="tc-ag-profile-cover">
+                      <div className="tc-ag-profile-cover-mark"><Headset size={24} /></div>
+                    </div>
+                    <div className="tc-ag-profile-main">
+                      <div className="tc-ag-profile-identity">
+                        <div className="tc-ag-profile-avatar" aria-hidden="true">
+                          {selectedAgent.name
+                            .split(" ")
+                            .map((part) => part[0])
+                            .join("")}
+                        </div>
+                        <div className="tc-ag-profile-name">
+                          <span className={`tc-ag-status tc-ag-status-${selectedAgent.status.toLowerCase()}`}>
+                            <span />
+                            {selectedAgent.status}
+                          </span>
+                          <h2>{selectedAgent.name}</h2>
+                          <p>Support agent · ID #{String(selectedAgent.id).padStart(3, "0")}</p>
+                        </div>
+                      </div>
+                      <div className="tc-ag-profile-actions">
+                        <a href={`mailto:${selectedAgent.email}`} className="tc-ag-profile-action-primary">
+                          <Mail size={17} />
+                          Email agent
+                        </a>
+                        <a href={`tel:${selectedAgent.phone.replace(/[^\d+]/g, "")}`} className="tc-ag-profile-action-secondary">
+                          <Phone size={17} />
+                          Call
+                        </a>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="tc-ag-profile-overview">
+                    <div className="tc-ag-profile-section-heading">
+                      <div>
+                        <span>AT A GLANCE</span>
+                        <h2>Agent overview</h2>
+                      </div>
+                    </div>
+                    <div className="tc-ag-profile-facts">
+                      <article className="tc-ag-profile-fact">
+                        <div className="tc-ag-profile-fact-icon tc-ag-blue"><Ticket size={20} /></div>
+                        <div>
+                          <span>Assigned tickets</span>
+                          <strong>{selectedAgent.tickets}</strong>
+                          <small>Current workload</small>
+                        </div>
+                      </article>
+                      <article className="tc-ag-profile-fact">
+                        <div className="tc-ag-profile-fact-icon tc-ag-purple">
+                          <BriefcaseBusiness size={20} />
+                        </div>
+                        <div>
+                          <span>Specialization</span>
+                          <strong>{selectedAgent.specialization}</strong>
+                          <small>Technical support area</small>
+                        </div>
+                      </article>
+                    </div>
+                  </section>
+
+                  <section className="tc-ag-profile-contact">
+                    <div className="tc-ag-profile-section-heading">
+                      <div>
+                        <span>GET IN TOUCH</span>
+                        <h2>Contact information</h2>
+                      </div>
+                    </div>
+                    <div className="tc-ag-profile-contact-grid">
+                      <a href={`mailto:${selectedAgent.email}`} className="tc-ag-profile-contact-item">
+                        <div className="tc-ag-profile-contact-icon"><Mail size={19} /></div>
+                        <div>
+                          <span>Email address</span>
+                          <strong>{selectedAgent.email}</strong>
+                        </div>
+                        <ArrowUpRight size={17} />
+                      </a>
+                      <a href={`tel:${selectedAgent.phone.replace(/[^\d+]/g, "")}`} className="tc-ag-profile-contact-item">
+                        <div className="tc-ag-profile-contact-icon"><Phone size={19} /></div>
+                        <div>
+                          <span>Phone number</span>
+                          <strong>{selectedAgent.phone}</strong>
+                        </div>
+                        <ArrowUpRight size={17} />
+                      </a>
+                    </div>
+                  </section>
+                </div>
+              ) : (
+                <section className="tc-ag-bottom-note">
+                  <div className="tc-ag-bottom-icon"><UserX size={21} /></div>
+                  <div>
+                    <strong>Agent not found</strong>
+                    <p>Return to the support team directory and choose an available agent.</p>
+                  </div>
+                </section>
+              )}
+
+              {selectedAgent && (
+                <section className="tc-ag-table-panel">
+                  <div className="tc-ag-table-heading">
+                    <div>
+                      <div className="tc-ag-table-title"><h2>Contact information</h2></div>
+                      <p>How to reach this support agent.</p>
+                    </div>
+                  </div>
+                  <div className="tc-ag-toolbar">
+                    <div className="tc-ag-contact">
+                      <a href={`mailto:${selectedAgent.email}`}>{selectedAgent.email}</a>
+                      <span>{selectedAgent.phone}</span>
+                    </div>
+                  </div>
+                </section>
+              )}
+            </>
+          ) : (
+            <>
           <section className="tc-ag-heading">
             <div>
               <div className="tc-ag-eyebrow">
@@ -632,6 +781,8 @@ function Agents() {
             </span>
             <span>Admin workspace · v1.0</span>
           </footer>
+            </>
+          )}
         </div>
       </main>
     </div>

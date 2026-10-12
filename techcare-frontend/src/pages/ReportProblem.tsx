@@ -15,6 +15,7 @@ function ReportProblem() {
     setLoading(true);
 
     const formData = new FormData(event.currentTarget);
+    selectedFiles.forEach((file) => formData.append("attachments", file));
     const token = getAuthToken();
 
     try {
@@ -22,15 +23,8 @@ function ReportProblem() {
         "/api/problem-reports",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
-          body: JSON.stringify({
-            deviceType: formData.get("deviceType"),
-            brand: formData.get("brand"),
-            model: formData.get("model"),
-            serialNumber: formData.get("serialNumber"),
-            problem: formData.get("problem"),
-            description: formData.get("description"),
-          }),
+          headers: token ? { Authorization: "Bearer " + token } : {},
+          body: formData,
         }
       );
       const data = await response.json();
@@ -60,7 +54,18 @@ function ReportProblem() {
   ) => {
     if (event.target.files) {
       const newFiles = Array.from(event.target.files);
+      if (selectedFiles.length + newFiles.length > 5) {
+        setError("You can attach up to 5 files to a report.");
+        event.target.value = "";
+        return;
+      }
+      if (newFiles.some((file) => file.size > 10 * 1024 * 1024)) {
+        setError("Each attachment must be 10 MB or smaller.");
+        event.target.value = "";
+        return;
+      }
 
+      setError("");
       setSelectedFiles((previousFiles) => [
         ...previousFiles,
         ...newFiles,
@@ -302,7 +307,7 @@ function ReportProblem() {
                     type="file"
                     id="problem-files"
                     multiple
-                    accept="image/*,.pdf,.doc,.docx,.txt"
+                    accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,.pdf,.doc,.docx,.txt"
                     onChange={handleFileChange}
                   />
 
@@ -333,8 +338,7 @@ function ReportProblem() {
 
 
                 <p className="file-help-text">
-                  Attachments are not saved yet. Submit the report details
-                  without relying on selected files.
+                  Attach up to 5 image, PDF, Word, or text files (10 MB maximum each).
                 </p>
 
 

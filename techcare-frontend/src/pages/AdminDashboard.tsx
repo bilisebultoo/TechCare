@@ -115,9 +115,9 @@ function AdminDashboard() {
   }, []);
 
   const visibleTickets = tickets.filter((ticket) =>
-    `${ticket.title} ${getCustomer(ticket.customer ?? ticket.customerId).name} ${ticket._id}`
+    `${ticket.title} ${getCustomer(ticket.customer ?? ticket.customerId).name} ${ticket._id} TK-${ticket._id.slice(-6)}`
       .toLowerCase()
-      .includes(search.toLowerCase())
+      .includes(search.trim().toLowerCase())
   );
   const recentTickets = visibleTickets.slice(0, 4);
   const pendingReports = problemReports.filter((report) => report.status === "PENDING");

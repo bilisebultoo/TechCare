@@ -27,6 +27,13 @@
   animation: customer-requests-spin 1s linear infinite;
 }
 
+.customer-requests-filter-hint {
+  margin: -5px 0 15px;
+  color: #718096;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 @keyframes customer-requests-spin {
   to { transform: rotate(360deg); }
 }

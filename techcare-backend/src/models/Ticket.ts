@@ -6,6 +6,21 @@ interface ITicketMessage {
   createdAt: Date;
 }
 
+interface IInternalTicketMessage {
+  _id: mongoose.Types.ObjectId;
+  sender: "ADMIN" | "AGENT";
+  senderName: string;
+  message: string;
+  attachments: {
+    _id: mongoose.Types.ObjectId;
+    filename: string;
+    originalName: string;
+    mimeType: string;
+    size: number;
+  }[];
+  createdAt: Date;
+}
+
 interface ITicket {
   title: string;
   description: string;
@@ -20,6 +35,7 @@ interface ITicket {
   customerConfirmed: boolean;
   customerConfirmedAt?: Date;
   messages: ITicketMessage[];
+  internalMessages: IInternalTicketMessage[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -35,6 +51,46 @@ const ticketMessageSchema = new Schema<ITicketMessage>(
       type: String,
       required: true,
       trim: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { _id: true }
+);
+
+const internalTicketMessageSchema = new Schema<IInternalTicketMessage>(
+  {
+    sender: {
+      type: String,
+      enum: ["ADMIN", "AGENT"],
+      required: true,
+    },
+    senderName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    message: {
+      type: String,
+      required: true,
+      trim: true,
+      default: "",
+    },
+    attachments: {
+      type: [
+        new Schema(
+          {
+            filename: { type: String, required: true },
+            originalName: { type: String, required: true },
+            mimeType: { type: String, required: true },
+            size: { type: Number, required: true },
+          },
+          { _id: true }
+        ),
+      ],
+      default: [],
     },
     createdAt: {
       type: Date,
@@ -102,6 +158,10 @@ const ticketSchema = new Schema<ITicket>(
     },
     messages: {
       type: [ticketMessageSchema],
+      default: [],
+    },
+    internalMessages: {
+      type: [internalTicketMessageSchema],
       default: [],
     },
   },

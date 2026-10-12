@@ -153,6 +153,11 @@ function AppRoutes() {
       />
 
       <Route
+        path="/admin/customers/:id"
+        element={<Customers />}
+      />
+
+      <Route
         path="/admin/agents"
         element={<Agents />}
       />
@@ -160,6 +165,11 @@ function AppRoutes() {
       <Route
         path="/admin/agents/create"
         element={<CreateAgent />}
+      />
+
+      <Route
+        path="/admin/agents/:id"
+        element={<Agents />}
       />
 
       <Route

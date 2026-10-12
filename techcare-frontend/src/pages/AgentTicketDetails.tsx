@@ -9,6 +9,25 @@ type TicketMessage = {
   message: string;
   createdAt?: string | Date;
 };
+type ReportAttachment = {
+  _id: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+};
+type InternalTicketMessage = {
+  _id: string;
+  sender: "ADMIN" | "AGENT";
+  senderName: string;
+  message: string;
+  createdAt?: string;
+  attachments: {
+    _id: string;
+    originalName: string;
+    mimeType: string;
+    size: number;
+  }[];
+};
 
 type Ticket = {
   _id: string;
@@ -21,6 +40,10 @@ type Ticket = {
   model?: string;
   customerConfirmed?: boolean;
   messages?: TicketMessage[];
+  sourceReportId?: {
+    _id: string;
+    attachments: ReportAttachment[];
+  } | string | null;
   customer?: {
     name?: string;
     email?: string;
@@ -42,8 +65,167 @@ function AgentTicketDetails() {
   const [messageText, setMessageText] = useState("");
   const [error, setError] = useState("");
   const [statusNotice, setStatusNotice] = useState("");
+  const [attachmentUrls, setAttachmentUrls] = useState<Record<string, string>>({});
+  const [attachmentError, setAttachmentError] = useState("");
+  const [internalMessages, setInternalMessages] = useState<InternalTicketMessage[]>([]);
+  const [internalMessageText, setInternalMessageText] = useState("");
+  const [internalMessageError, setInternalMessageError] = useState("");
+  const [sendingInternalMessage, setSendingInternalMessage] = useState(false);
+  const [internalMessageFiles, setInternalMessageFiles] = useState<File[]>([]);
+  const [internalAttachmentUrls, setInternalAttachmentUrls] = useState<Record<string, string>>({});
   const ticketRequestId = useRef(0);
   const statusUpdateInProgress = useRef(false);
+  const reportAttachmentMetadata = JSON.stringify(
+    ticket?.sourceReportId && typeof ticket.sourceReportId === "object"
+      ? {
+          reportId: ticket.sourceReportId._id,
+          attachments: ticket.sourceReportId.attachments,
+        }
+      : null
+  );
+  const internalAttachmentSignature = JSON.stringify(
+    internalMessages.flatMap((message) =>
+      (message.attachments ?? []).map((attachment) => ({
+        ticketId: ticket?._id,
+        messageId: message._id,
+        attachmentId: attachment._id,
+      }))
+    )
+  );
+
+  useEffect(() => {
+    const sourceReport = JSON.parse(reportAttachmentMetadata) as {
+      reportId: string;
+      attachments: ReportAttachment[];
+    } | null;
+    if (!sourceReport) return;
+    const sourceReportId = sourceReport.reportId;
+    const attachments = sourceReport.attachments;
+    if (attachments.length === 0) return;
+
+    let active = true;
+    const objectUrls: string[] = [];
+    async function loadAttachments() {
+      try {
+        const token = getToken();
+        const entries: [string, string][] = [];
+        for (const attachment of attachments) {
+          const response = await fetch(
+            `/api/problem-reports/${sourceReportId}/attachments/${attachment._id}`,
+            { headers: token ? { Authorization: "Bearer " + token } : {} }
+          );
+          if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || `Unable to load ${attachment.originalName}.`);
+          }
+          const url = URL.createObjectURL(await response.blob());
+          objectUrls.push(url);
+          entries.push([attachment._id, url]);
+        }
+        if (active) {
+          setAttachmentUrls(Object.fromEntries(entries));
+          setAttachmentError("");
+        }
+      } catch (err) {
+        objectUrls.forEach((url) => URL.revokeObjectURL(url));
+        if (active) {
+          setAttachmentError(
+            err instanceof Error ? err.message : "Unable to load report attachments."
+          );
+        }
+      }
+    }
+
+    void loadAttachments();
+    return () => {
+      active = false;
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [reportAttachmentMetadata]);
+
+  useEffect(() => {
+    if (!ticket?._id) return;
+    let active = true;
+    const loadMessages = async () => {
+      try {
+        const token = getToken();
+        const response = await fetch(`/api/tickets/${ticket._id}/internal-messages`, {
+          cache: "no-store",
+          headers: token ? { Authorization: "Bearer " + token } : {},
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || `Unable to load admin conversation (HTTP ${response.status}).`);
+        }
+        if (!Array.isArray(data.messages)) {
+          throw new Error("The server returned an invalid admin conversation.");
+        }
+        if (active) {
+          setInternalMessages(data.messages);
+          setInternalMessageError("");
+        }
+      } catch (err) {
+        if (active) {
+          setInternalMessageError(
+            err instanceof Error ? err.message : "Unable to load admin conversation."
+          );
+        }
+      }
+    };
+
+    void loadMessages();
+    const interval = window.setInterval(() => void loadMessages(), 5000);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+    };
+  }, [ticket?._id]);
+
+  useEffect(() => {
+    const attachments = JSON.parse(internalAttachmentSignature) as {
+      ticketId?: string;
+      messageId: string;
+      attachmentId: string;
+    }[];
+    if (attachments.length === 0) return;
+
+    let active = true;
+    const objectUrls: string[] = [];
+    async function loadInternalAttachments() {
+      try {
+        const token = getToken();
+        const entries: [string, string][] = [];
+        for (const attachment of attachments) {
+          if (!attachment.ticketId) continue;
+          const response = await fetch(
+            `/api/tickets/${attachment.ticketId}/internal-messages/${attachment.messageId}/attachments/${attachment.attachmentId}`,
+            { headers: token ? { Authorization: "Bearer " + token } : {} }
+          );
+          if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || "Unable to load a team-chat file.");
+          }
+          const key = `${attachment.messageId}:${attachment.attachmentId}`;
+          const url = URL.createObjectURL(await response.blob());
+          objectUrls.push(url);
+          entries.push([key, url]);
+        }
+        if (active) setInternalAttachmentUrls(Object.fromEntries(entries));
+      } catch (err) {
+        if (active) {
+          setInternalMessageError(
+            err instanceof Error ? err.message : "Unable to load team-chat files."
+          );
+        }
+      }
+    }
+
+    void loadInternalAttachments();
+    return () => {
+      active = false;
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [internalAttachmentSignature]);
 
   useEffect(() => {
     let active = true;
@@ -180,6 +362,41 @@ function AgentTicketDetails() {
     }
   }
 
+  async function handleSendInternalMessage(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!ticket || ticket.status === "CLOSED") return;
+
+    const message = internalMessageText.trim();
+    if (!message && internalMessageFiles.length === 0) return;
+
+    setSendingInternalMessage(true);
+    setInternalMessageError("");
+    try {
+      const token = getToken();
+      const formData = new FormData();
+      formData.append("message", message);
+      internalMessageFiles.forEach((file) => formData.append("attachments", file));
+      const response = await fetch(`/api/tickets/${ticket._id}/internal-messages`, {
+        method: "POST",
+        headers: token ? { Authorization: "Bearer " + token } : {},
+        body: formData,
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || `Unable to send message (HTTP ${response.status}).`);
+      }
+      setInternalMessages((current) => [...current, data.newMessage]);
+      setInternalMessageText("");
+      setInternalMessageFiles([]);
+    } catch (err) {
+      setInternalMessageError(
+        err instanceof Error ? err.message : "Unable to send a message to the admin."
+      );
+    } finally {
+      setSendingInternalMessage(false);
+    }
+  }
+
   function handleLogout() {
     clearAuthToken();
     localStorage.removeItem("user");
@@ -199,6 +416,10 @@ function AgentTicketDetails() {
       ? "Closed"
       : ticket?.status;
   const messages = ticket?.messages ?? [];
+  const problemReportAttachments = JSON.parse(reportAttachmentMetadata) as {
+    reportId: string;
+    attachments: ReportAttachment[];
+  } | null;
 
   return (
     <div style={{ minHeight: "100vh", background: "#f7f9fc", display: "flex" }}>
@@ -304,6 +525,52 @@ function AgentTicketDetails() {
                   {ticket.description}
                 </p>
               </div>
+              {problemReportAttachments && (
+                <div style={{ marginTop: 20 }}>
+                  <h3 style={{ margin: "0 0 10px", fontSize: 14, color: "#303640" }}>
+                    Customer attachments
+                  </h3>
+                  {attachmentError && (
+                    <p role="alert" style={{ color: "#b42318", fontSize: 12 }}>
+                      {attachmentError}
+                    </p>
+                  )}
+                  {problemReportAttachments.attachments.length === 0 ? (
+                    <p style={{ color: "#929aaa", fontSize: 12 }}>
+                      No files were attached to the original problem report.
+                    </p>
+                  ) : (
+                    <div style={{ display: "grid", gap: 12 }}>
+                      {problemReportAttachments.attachments.map((attachment) => {
+                        const url = attachmentUrls[attachment._id];
+                        return (
+                          <div key={attachment._id} style={{ display: "grid", gap: 6 }}>
+                            {url && attachment.mimeType.startsWith("image/") && (
+                              <img
+                                src={url}
+                                alt={attachment.originalName}
+                                style={{ maxWidth: "100%", maxHeight: 360, objectFit: "contain", objectPosition: "left" }}
+                              />
+                            )}
+                            {url ? (
+                              <a href={url} target="_blank" rel="noreferrer">
+                                {attachment.originalName}
+                              </a>
+                            ) : (
+                              <span style={{ color: "#687384", fontSize: 12 }}>
+                                {attachment.originalName} (loading...)
+                              </span>
+                            )}
+                            <small style={{ color: "#929aaa" }}>
+                              {(attachment.size / 1024 / 1024).toFixed(2)} MB
+                            </small>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
             </section>
 
             <section style={{ ...cardStyle, padding: "22px 25px", marginTop: 15 }}>
@@ -438,6 +705,160 @@ function AgentTicketDetails() {
                     </button>
                   </div>
                 </form>}
+              </div>
+            </section>
+
+            <section style={{ ...cardStyle, marginTop: 15, overflow: "hidden" }}>
+              <div style={{ padding: "22px 25px", borderBottom: "1px solid #edf0f4" }}>
+                <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 8, fontWeight: 800 }}>
+                  PRIVATE TEAM CHAT
+                </p>
+                <h2 style={{ margin: 0, fontSize: 17, color: "#303640" }}>
+                  Conversation with Admin
+                </h2>
+                <p style={{ margin: "6px 0 0", color: "#929aaa", fontSize: 10 }}>
+                  These messages are private and are not visible to the customer.
+                </p>
+              </div>
+              <div style={{ padding: 25, display: "grid", gap: 12 }}>
+                {internalMessageError && (
+                  <div role="alert" style={alertStyle}>{internalMessageError}</div>
+                )}
+                {internalMessages.length === 0 ? (
+                  <div style={{ color: "#929aaa", fontSize: 11 }}>
+                    No admin messages yet.
+                  </div>
+                ) : internalMessages.map((item) => (
+                  <div
+                    key={item._id}
+                    style={{
+                      justifySelf: item.sender === "AGENT" ? "end" : "start",
+                      maxWidth: "80%",
+                      padding: "12px 14px",
+                      border: "1px solid #edf0f4",
+                      borderRadius: 10,
+                      background: item.sender === "AGENT" ? "#eaf3ff" : "#f6f8fb",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
+                      <strong style={{ fontSize: 11 }}>
+                        {item.senderName} ({item.sender === "ADMIN" ? "Admin" : "You"})
+                      </strong>
+                      <span style={{ fontSize: 9, color: "#929aaa" }}>
+                        {item.createdAt ? new Date(item.createdAt).toLocaleString() : "Just now"}
+                      </span>
+                    </div>
+                    {item.message && (
+                      <div style={{ fontSize: 11, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
+                        {item.message}
+                      </div>
+                    )}
+                    {(item.attachments ?? []).map((attachment) => {
+                      const url = internalAttachmentUrls[`${item._id}:${attachment._id}`];
+                      return url ? (
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noreferrer"
+                          key={attachment._id}
+                          style={{ display: "grid", gap: 6, marginTop: 8, color: "#1677ff", fontSize: 11 }}
+                        >
+                          {attachment.mimeType.startsWith("image/") && (
+                            <img
+                              src={url}
+                              alt={attachment.originalName}
+                              style={{ maxWidth: "100%", maxHeight: 300, objectFit: "contain", objectPosition: "left" }}
+                            />
+                          )}
+                          {attachment.originalName}
+                        </a>
+                      ) : (
+                        <span key={attachment._id} style={{ display: "block", fontSize: 11 }}>
+                          {attachment.originalName} (loading...)
+                        </span>
+                      );
+                    })}
+                  </div>
+                ))}
+
+                {ticket.status === "CLOSED" ? (
+                  <div role="status" style={closedConversationStyle}>
+                    This ticket is closed. The team conversation is read-only.
+                  </div>
+                ) : (
+                  <form onSubmit={(event) => void handleSendInternalMessage(event)} style={{ display: "grid", gap: 10 }}>
+                    <textarea
+                      value={internalMessageText}
+                      onChange={(event) => setInternalMessageText(event.target.value)}
+                      placeholder="Reply to the admin..."
+                      rows={3}
+                      maxLength={5000}
+                      style={{
+                        width: "100%",
+                        resize: "vertical",
+                        border: "1px solid #dfe5ec",
+                        borderRadius: 8,
+                        padding: "12px 14px",
+                        fontSize: 11,
+                        color: "#303640",
+                        boxSizing: "border-box",
+                      }}
+                    />
+                    <label style={{ color: "#1677ff", fontSize: 11, fontWeight: 650 }}>
+                      Attach files
+                      <input
+                        type="file"
+                        multiple
+                        accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,.pdf,.doc,.docx,.txt"
+                        onChange={(event) => {
+                          const files = Array.from(event.target.files ?? []);
+                          if (internalMessageFiles.length + files.length > 5) {
+                            setInternalMessageError("You can attach up to 5 files per message.");
+                          } else if (files.some((file) => file.size > 10 * 1024 * 1024)) {
+                            setInternalMessageError("Each attachment must be 10 MB or smaller.");
+                          } else {
+                            setInternalMessageError("");
+                            setInternalMessageFiles((current) => [...current, ...files]);
+                          }
+                          event.target.value = "";
+                        }}
+                      />
+                    </label>
+                    {internalMessageFiles.length > 0 && (
+                      <ul style={{ margin: 0, paddingLeft: 20, color: "#687384", fontSize: 11 }}>
+                        {internalMessageFiles.map((file, index) => (
+                          <li key={`${file.name}-${index}`}>
+                            {file.name}{" "}
+                            <button
+                              type="button"
+                              onClick={() => setInternalMessageFiles((files) => files.filter((_, fileIndex) => fileIndex !== index))}
+                            >
+                              Remove
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                      <button
+                        type="submit"
+                        disabled={sendingInternalMessage || (!internalMessageText.trim() && internalMessageFiles.length === 0)}
+                        style={{
+                          padding: "10px 16px",
+                          border: 0,
+                          borderRadius: 8,
+                          background: sendingInternalMessage || (!internalMessageText.trim() && internalMessageFiles.length === 0) ? "#c4d9ff" : "#1677ff",
+                          color: "#fff",
+                          fontSize: 10,
+                          fontWeight: 700,
+                          cursor: sendingInternalMessage || (!internalMessageText.trim() && internalMessageFiles.length === 0) ? "not-allowed" : "pointer",
+                        }}
+                      >
+                        {sendingInternalMessage ? "Sending..." : "Reply to Admin"}
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             </section>
 

@@ -613,6 +613,11 @@
   white-space: nowrap;
 }
 
+.problem-reports-page .pr-priority-unassigned {
+  color: #8994a7;
+  font-size: 10px;
+}
+
 .problem-reports-page .pr-priority > span,
 .problem-reports-page .pr-status > span {
   display: inline-block;
@@ -654,6 +659,42 @@
 }
 
 .problem-reports-page .pr-status-converted {
+  border-color: #d6f0e2;
+  background: #ecfaf3;
+  color: #23875a;
+}
+
+.problem-reports-page .pr-report-statuses {
+  display: grid;
+  justify-items: start;
+  gap: 5px;
+}
+
+.problem-reports-page .pr-ticket-status {
+  padding: 4px 7px;
+  border: 1px solid #dce4ef;
+  border-radius: 7px;
+  background: #f8fafc;
+  color: #475467;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.problem-reports-page .pr-ticket-status-open {
+  border-color: #f7e5c1;
+  background: #fff8e9;
+  color: #a97514;
+}
+
+.problem-reports-page .pr-ticket-status-in-progress {
+  border-color: #dce4ff;
+  background: #eef2ff;
+  color: #4c64c8;
+}
+
+.problem-reports-page .pr-ticket-status-resolved,
+.problem-reports-page .pr-ticket-status-closed {
   border-color: #d6f0e2;
   background: #ecfaf3;
   color: #23875a;

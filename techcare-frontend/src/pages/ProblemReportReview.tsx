@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getAuthToken } from "../utils/auth";
 import { AlertCircle, ArrowLeft, Check, Clock3, FileText, RefreshCw, ShieldCheck } from "lucide-react";
@@ -6,10 +6,31 @@ import Sidebar from "../components/Sidebar";
 import "./ProblemReportReview.css";
 
 type ReportStatus = "PENDING" | "REVIEWED" | "CONVERTED";
+type Priority = "LOW" | "MEDIUM" | "HIGH";
+type TicketStatus = "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED";
 type Customer = {
   name?: string;
   email?: string;
   phone?: string;
+};
+type ReportAttachment = {
+  _id: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+};
+type InternalMessage = {
+  _id: string;
+  sender: "ADMIN" | "AGENT";
+  senderName: string;
+  message: string;
+  createdAt: string;
+  attachments: {
+    _id: string;
+    originalName: string;
+    mimeType: string;
+    size: number;
+  }[];
 };
 
 type ProblemReport = {
@@ -22,9 +43,12 @@ type ProblemReport = {
   serialNumber?: string;
   problem?: string;
   description?: string;
+  attachments?: ReportAttachment[];
   status?: ReportStatus;
   createdAt?: string;
   ticketId?: string;
+  ticketPriority?: Priority;
+  ticketStatus?: TicketStatus;
   assignedAgent?: Pick<Agent, "id" | "name" | "email" | "specialization"> | null;
 };
 
@@ -71,9 +95,27 @@ function ProblemReportReview() {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [agentsLoading, setAgentsLoading] = useState(true);
   const [selectedAgentId, setSelectedAgentId] = useState("");
+  const [selectedPriority, setSelectedPriority] = useState<Priority | "">("");
   const [assigning, setAssigning] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [attachmentUrls, setAttachmentUrls] = useState<Record<string, string>>({});
+  const [attachmentError, setAttachmentError] = useState("");
+  const [internalMessages, setInternalMessages] = useState<InternalMessage[]>([]);
+  const [internalMessageText, setInternalMessageText] = useState("");
+  const [internalMessageError, setInternalMessageError] = useState("");
+  const [sendingInternalMessage, setSendingInternalMessage] = useState(false);
+  const [internalMessageFiles, setInternalMessageFiles] = useState<File[]>([]);
+  const [internalAttachmentUrls, setInternalAttachmentUrls] = useState<Record<string, string>>({});
+  const internalAttachmentSignature = JSON.stringify(
+    internalMessages.flatMap((message) =>
+      (message.attachments ?? []).map((attachment) => ({
+        ticketId: report?.ticketId,
+        messageId: message._id,
+        attachmentId: attachment._id,
+      }))
+    )
+  );
 
   useEffect(() => {
     let active = true;
@@ -150,6 +192,173 @@ function ProblemReportReview() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!report?.attachments?.length) return;
+    const currentReport = report;
+
+    let active = true;
+    const objectUrls: string[] = [];
+    async function loadAttachments() {
+      try {
+        const token = getToken();
+        const entries: [string, string][] = [];
+        for (const attachment of currentReport.attachments ?? []) {
+          const response = await fetch(
+            `${API_URL}/problem-reports/${currentReport._id}/attachments/${attachment._id}`,
+            { headers: token ? { Authorization: "Bearer " + token } : {} }
+          );
+          if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || `Unable to load ${attachment.originalName}.`);
+          }
+          const url = URL.createObjectURL(await response.blob());
+          objectUrls.push(url);
+          entries.push([attachment._id, url]);
+        }
+        if (active) {
+          setAttachmentUrls(Object.fromEntries(entries));
+          setAttachmentError("");
+        }
+      } catch (err) {
+        objectUrls.forEach((url) => URL.revokeObjectURL(url));
+        if (active) {
+          setAttachmentError(
+            err instanceof Error ? err.message : "Unable to load report attachments."
+          );
+        }
+      }
+    }
+
+    void loadAttachments();
+    return () => {
+      active = false;
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [report]);
+
+  useEffect(() => {
+    if (!report?.ticketId) return;
+    let active = true;
+    const loadMessages = async () => {
+      try {
+        const token = getToken();
+        const response = await fetch(`${API_URL}/tickets/${report.ticketId}/internal-messages`, {
+          cache: "no-store",
+          headers: token ? { Authorization: "Bearer " + token } : {},
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || `Unable to load agent conversation (HTTP ${response.status}).`);
+        }
+        if (!Array.isArray(data.messages)) {
+          throw new Error("The server returned an invalid agent conversation.");
+        }
+        if (active) {
+          setInternalMessages(data.messages);
+          if (data.ticketStatus) {
+            setReport((current) =>
+              current && current.ticketStatus !== data.ticketStatus
+                ? { ...current, ticketStatus: data.ticketStatus }
+                : current
+            );
+          }
+          setInternalMessageError("");
+        }
+      } catch (err) {
+        if (active) {
+          setInternalMessageError(
+            err instanceof Error ? err.message : "Unable to load agent conversation."
+          );
+        }
+      }
+    };
+
+    void loadMessages();
+    const interval = window.setInterval(() => void loadMessages(), 5000);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+    };
+  }, [report?.ticketId]);
+
+  useEffect(() => {
+    const attachments = JSON.parse(internalAttachmentSignature) as {
+      ticketId?: string;
+      messageId: string;
+      attachmentId: string;
+    }[];
+    if (attachments.length === 0) return;
+
+    let active = true;
+    const objectUrls: string[] = [];
+    async function loadInternalAttachments() {
+      try {
+        const token = getToken();
+        const entries: [string, string][] = [];
+        for (const attachment of attachments) {
+          if (!attachment.ticketId) continue;
+          const response = await fetch(
+            `${API_URL}/tickets/${attachment.ticketId}/internal-messages/${attachment.messageId}/attachments/${attachment.attachmentId}`,
+            { headers: token ? { Authorization: "Bearer " + token } : {} }
+          );
+          if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || "Unable to load a team-chat file.");
+          }
+          const key = `${attachment.messageId}:${attachment.attachmentId}`;
+          const url = URL.createObjectURL(await response.blob());
+          objectUrls.push(url);
+          entries.push([key, url]);
+        }
+        if (active) setInternalAttachmentUrls(Object.fromEntries(entries));
+      } catch (err) {
+        if (active) {
+          setInternalMessageError(
+            err instanceof Error ? err.message : "Unable to load team-chat files."
+          );
+        }
+      }
+    }
+
+    void loadInternalAttachments();
+    return () => {
+      active = false;
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [internalAttachmentSignature]);
+
+  async function sendInternalMessage(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!report?.ticketId || (!internalMessageText.trim() && internalMessageFiles.length === 0)) return;
+
+    setSendingInternalMessage(true);
+    setInternalMessageError("");
+    try {
+      const token = getToken();
+      const formData = new FormData();
+      formData.append("message", internalMessageText.trim());
+      internalMessageFiles.forEach((file) => formData.append("attachments", file));
+      const response = await fetch(`${API_URL}/tickets/${report.ticketId}/internal-messages`, {
+        method: "POST",
+        headers: token ? { Authorization: "Bearer " + token } : {},
+        body: formData,
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || `Unable to send message (HTTP ${response.status}).`);
+      }
+      setInternalMessages((current) => [...current, data.newMessage]);
+      setInternalMessageText("");
+      setInternalMessageFiles([]);
+    } catch (err) {
+      setInternalMessageError(
+        err instanceof Error ? err.message : "Unable to send message to the assigned agent."
+      );
+    } finally {
+      setSendingInternalMessage(false);
+    }
+  }
+
   async function updateStatus(status: ReportStatus) {
     if (!report || status === getStatus(report.status)) return;
 
@@ -184,6 +393,10 @@ function ProblemReportReview() {
       setError("Select an active agent before assigning this report.");
       return;
     }
+    if (!selectedPriority) {
+      setError("Select a priority before assigning this report.");
+      return;
+    }
 
     setAssigning(true);
     setError("");
@@ -196,7 +409,10 @@ function ProblemReportReview() {
           "Content-Type": "application/json",
           ...(token ? { Authorization: "Bearer " + token } : {}),
         },
-        body: JSON.stringify({ agentId: selectedAgentId }),
+        body: JSON.stringify({
+          agentId: selectedAgentId,
+          priority: selectedPriority,
+        }),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -208,6 +424,8 @@ function ProblemReportReview() {
         ...current,
         ...(data.problemReport ?? { status: "CONVERTED" }),
         ticketId: data.ticket?._id,
+        ticketPriority: data.ticket?.priority ?? selectedPriority,
+        ticketStatus: data.ticket?.status ?? "OPEN",
         assignedAgent: data.ticket?.agent ?? (assignedAgent
           ? {
               id: assignedAgent.id,
@@ -278,6 +496,13 @@ function ProblemReportReview() {
               <span className={`pvr-status pvr-status-${status.toLowerCase()}`}>
                 {status === "PENDING" ? "Pending review" : status.toLowerCase()}
               </span>
+              {report.ticketStatus && (
+                <span className={`pvr-ticket-status pvr-ticket-status-${report.ticketStatus.toLowerCase().replaceAll("_", "-")}`}>
+                  Ticket: {report.ticketStatus === "IN_PROGRESS"
+                    ? "In Progress"
+                    : report.ticketStatus.charAt(0) + report.ticketStatus.slice(1).toLowerCase()}
+                </span>
+              )}
             </section>
 
             <div className="pvr-grid">
@@ -322,6 +547,40 @@ function ProblemReportReview() {
                     <strong>{report.problem || "Problem not specified"}</strong>
                     <p>{report.description || "No additional description provided."}</p>
                   </div>
+                </section>
+
+                <section className="pvr-card">
+                  <div className="pvr-card-heading">
+                    <div>
+                      <h2>Customer attachments</h2>
+                      <p>Files submitted with this problem report.</p>
+                    </div>
+                  </div>
+                  {attachmentError && <p className="pvr-attachment-error" role="alert">{attachmentError}</p>}
+                  {!report.attachments?.length ? (
+                    <p className="pvr-attachment-empty">No files were attached to this report.</p>
+                  ) : (
+                    <div className="pvr-attachments">
+                      {report.attachments.map((attachment) => {
+                        const url = attachmentUrls[attachment._id];
+                        return (
+                          <div className="pvr-attachment" key={attachment._id}>
+                            {url && attachment.mimeType.startsWith("image/") && (
+                              <img src={url} alt={attachment.originalName} />
+                            )}
+                            {url ? (
+                              <a href={url} target="_blank" rel="noreferrer">
+                                {attachment.originalName}
+                              </a>
+                            ) : (
+                              <span>{attachment.originalName} (loading...)</span>
+                            )}
+                            <small>{(attachment.size / 1024 / 1024).toFixed(2)} MB</small>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </section>
               </div>
 
@@ -371,6 +630,8 @@ function ProblemReportReview() {
                         )}
                         <span>Specialization</span>
                         <strong>{report.assignedAgent?.specialization || "Not specified"}</strong>
+                        <span>Ticket priority</span>
+                        <strong>{report.ticketPriority || "Not available"}</strong>
                       </div>
                     </div>
                   ) : (
@@ -394,6 +655,26 @@ function ProblemReportReview() {
                           </option>
                         ))}
                       </select>
+                      <label className="pvr-agent-label" htmlFor="pvr-priority">
+                        Ticket priority
+                      </label>
+                      <select
+                        id="pvr-priority"
+                        className="pvr-agent-select"
+                        value={selectedPriority}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          if (value === "" || value === "LOW" || value === "MEDIUM" || value === "HIGH") {
+                            setSelectedPriority(value);
+                          }
+                        }}
+                        disabled={assigning}
+                      >
+                        <option value="">Choose a priority</option>
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                      </select>
                       {!agentsLoading && agents.length === 0 && (
                         <p className="pvr-saving">No active agents are available.</p>
                       )}
@@ -408,6 +689,90 @@ function ProblemReportReview() {
                     </>
                   )}
                 </section>
+
+                {report.ticketId && (
+                  <section className="pvr-card">
+                    <div className="pvr-card-heading">
+                      <div>
+                        <h2>Private agent conversation</h2>
+                        <p>Messages here are visible only to you and the assigned agent.</p>
+                      </div>
+                    </div>
+                    {internalMessageError && (
+                      <p className="pvr-attachment-error" role="alert">{internalMessageError}</p>
+                    )}
+                    <div className="pvr-internal-messages" aria-live="polite">
+                      {internalMessages.length === 0 ? (
+                        <p className="pvr-attachment-empty">No messages yet. Ask the agent for an update.</p>
+                      ) : internalMessages.map((message) => (
+                        <div className={`pvr-internal-message pvr-internal-message-${message.sender.toLowerCase()}`} key={message._id}>
+                          <strong>{message.senderName} ({message.sender === "ADMIN" ? "Admin" : "Agent"})</strong>
+                          {message.message && <p>{message.message}</p>}
+                          {(message.attachments ?? []).map((attachment) => {
+                            const url = internalAttachmentUrls[`${message._id}:${attachment._id}`];
+                            return url ? (
+                              <a className="pvr-internal-attachment" href={url} target="_blank" rel="noreferrer" key={attachment._id}>
+                                {attachment.mimeType.startsWith("image/") && <img src={url} alt={attachment.originalName} />}
+                                {attachment.originalName}
+                              </a>
+                            ) : (
+                              <span key={attachment._id}>{attachment.originalName} (loading...)</span>
+                            );
+                          })}
+                          <small>{new Date(message.createdAt).toLocaleString()}</small>
+                        </div>
+                      ))}
+                    </div>
+                    {report.ticketStatus === "CLOSED" ? (
+                      <p className="pvr-attachment-empty">This ticket is closed. The private conversation is read-only.</p>
+                    ) : (
+                      <form className="pvr-internal-form" onSubmit={(event) => void sendInternalMessage(event)}>
+                        <textarea
+                          value={internalMessageText}
+                          onChange={(event) => setInternalMessageText(event.target.value)}
+                          placeholder="Ask the agent for an update..."
+                          rows={3}
+                          maxLength={5000}
+                        />
+                        <label className="pvr-chat-file-label">
+                          Attach files
+                          <input
+                            type="file"
+                            multiple
+                            accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,.pdf,.doc,.docx,.txt"
+                            onChange={(event) => {
+                              const files = Array.from(event.target.files ?? []);
+                              if (internalMessageFiles.length + files.length > 5) {
+                                setInternalMessageError("You can attach up to 5 files per message.");
+                              } else if (files.some((file) => file.size > 10 * 1024 * 1024)) {
+                                setInternalMessageError("Each attachment must be 10 MB or smaller.");
+                              } else {
+                                setInternalMessageError("");
+                                setInternalMessageFiles((current) => [...current, ...files]);
+                              }
+                              event.target.value = "";
+                            }}
+                          />
+                        </label>
+                        {internalMessageFiles.length > 0 && (
+                          <ul className="pvr-chat-selected-files">
+                            {internalMessageFiles.map((file, index) => (
+                              <li key={`${file.name}-${index}`}>
+                                {file.name}
+                                <button type="button" onClick={() => setInternalMessageFiles((files) => files.filter((_, fileIndex) => fileIndex !== index))}>
+                                  Remove
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        <button type="submit" disabled={sendingInternalMessage || (!internalMessageText.trim() && internalMessageFiles.length === 0)}>
+                          {sendingInternalMessage ? "Sending..." : "Message agent"}
+                        </button>
+                      </form>
+                    )}
+                  </section>
+                )}
 
                 <section className="pvr-secure-note">
                   <ShieldCheck size={20} />

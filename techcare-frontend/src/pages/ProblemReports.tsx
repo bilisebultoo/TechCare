@@ -20,6 +20,7 @@ import "./ProblemReports.css";
 type ReportStatus = "PENDING" | "REVIEWED" | "CONVERTED";
 type FilterStatus = "ALL" | ReportStatus;
 type Priority = "LOW" | "MEDIUM" | "HIGH";
+type TicketStatus = "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED";
 
 type Customer = {
   _id?: string;
@@ -39,7 +40,8 @@ type ProblemReport = {
   problem?: string;
   description?: string;
   status?: ReportStatus;
-  priority?: Priority;
+  ticketPriority?: Priority;
+  ticketStatus?: TicketStatus;
   createdAt?: string;
 };
 
@@ -172,19 +174,29 @@ export default function ProblemReports() {
 
       const searchableText = [
         report._id,
+        `PR-${getShortId(report._id)}`,
         customer.name,
         customer.email,
+        customer.phone,
         report.deviceType,
         report.brand,
         report.model,
+        report.serialNumber,
         report.problem,
         report.description,
+        report.ticketPriority ? getPriority(report.ticketPriority) : "",
+        report.ticketStatus,
+        status,
+        formatDate(report.createdAt),
       ]
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
 
-      return matchesFilter && (!term || searchableText.includes(term));
+      const matchesSearch =
+        !term || term.split(/\s+/).every((word) => searchableText.includes(word));
+
+      return matchesFilter && matchesSearch;
     });
   }, [reports, filter, search]);
 
@@ -394,7 +406,9 @@ export default function ProblemReports() {
                     filteredReports.map((report) => {
                       const customer = getCustomer(report);
                       const status = getStatus(report.status);
-                      const priority = getPriority(report.priority);
+                      const priority = report.ticketPriority
+                        ? getPriority(report.ticketPriority)
+                        : null;
                       const deviceName = [
                         report.brand,
                         report.model,
@@ -450,21 +464,34 @@ export default function ProblemReports() {
                           </td>
 
                           <td>
-                            <span className={`pr-priority pr-priority-${priority.toLowerCase()}`}>
-                              <span />
-                              {priority.charAt(0) + priority.slice(1).toLowerCase()}
-                            </span>
+                            {priority ? (
+                              <span className={`pr-priority pr-priority-${priority.toLowerCase()}`}>
+                                <span />
+                                {priority.charAt(0) + priority.slice(1).toLowerCase()}
+                              </span>
+                            ) : (
+                              <span className="pr-priority-unassigned">Not assigned</span>
+                            )}
                           </td>
 
                           <td>
-                            <span className={`pr-status pr-status-${status.toLowerCase()}`}>
-                              <span />
-                              {status === "PENDING"
-                                ? "Pending"
-                                : status === "REVIEWED"
-                                  ? "Reviewed"
-                                  : "Converted"}
-                            </span>
+                            <div className="pr-report-statuses">
+                              <span className={`pr-status pr-status-${status.toLowerCase()}`}>
+                                <span />
+                                {status === "PENDING"
+                                  ? "Pending"
+                                  : status === "REVIEWED"
+                                    ? "Reviewed"
+                                    : "Converted"}
+                              </span>
+                              {report.ticketStatus && (
+                                <span className={`pr-ticket-status pr-ticket-status-${report.ticketStatus.toLowerCase().replaceAll("_", "-")}`}>
+                                  Ticket: {report.ticketStatus === "IN_PROGRESS"
+                                    ? "In Progress"
+                                    : report.ticketStatus.charAt(0) + report.ticketStatus.slice(1).toLowerCase()}
+                                </span>
+                              )}
+                            </div>
                           </td>
 
                           <td>

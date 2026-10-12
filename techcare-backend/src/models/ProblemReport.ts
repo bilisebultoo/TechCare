@@ -1,5 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
+interface IProblemReportAttachment {
+  _id?: mongoose.Types.ObjectId;
+  filename: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+}
+
 interface IProblemReport {
   customerId: mongoose.Types.ObjectId;
 
@@ -10,6 +18,7 @@ interface IProblemReport {
 
   problem: string;
   description: string;
+  attachments: IProblemReportAttachment[];
 
   status: "PENDING" | "REVIEWED" | "CONVERTED";
 
@@ -57,6 +66,21 @@ const problemReportSchema = new Schema<IProblemReport>(
       type: String,
       required: true,
       trim: true,
+    },
+
+    attachments: {
+      type: [
+        new Schema<IProblemReportAttachment>(
+          {
+            filename: { type: String, required: true },
+            originalName: { type: String, required: true },
+            mimeType: { type: String, required: true },
+            size: { type: Number, required: true },
+          },
+          { _id: true }
+        ),
+      ],
+      default: [],
     },
 
     status: {

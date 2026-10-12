@@ -113,8 +113,10 @@ function AdminTickets() {
     const matchesSearch = [
       title,
       ticket._id,
+      `TK-${ticket._id.slice(-6)}`,
       getCustomerName(ticket),
       ticket.description || "",
+      status,
     ]
       .join(" ")
       .toLowerCase()

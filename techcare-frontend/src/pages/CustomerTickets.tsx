@@ -80,7 +80,10 @@ function CustomerTickets() {
     () =>
       reports.filter(
         (report) =>
-          filter === "ALL" || statusLabel(report.status) === filter
+          filter === "ALL" ||
+          (filter === "REVIEWED"
+            ? report.status === "REVIEWED" || report.status === "CONVERTED"
+            : statusLabel(report.status) === filter)
       ),
     [filter, reports]
   );
@@ -126,6 +129,10 @@ function CustomerTickets() {
             </button>
           ))}
         </div>
+        <p className="customer-requests-filter-hint">
+          Requests assigned to an agent are marked Converted and are also included
+          under Reviewed.
+        </p>
 
         {error && (
           <div className="customer-requests-error" role="alert">

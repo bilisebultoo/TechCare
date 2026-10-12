@@ -1,6 +1,6 @@
 
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { clearAuthToken } from "../utils/auth";
 import {
   LayoutDashboard,
@@ -12,6 +12,10 @@ import {
   Settings,
   LogOut,
   Search,
+  ArrowLeft,
+  ArrowUpRight,
+  Mail,
+  Phone,
   Bell,
   Plus,
   ChevronRight,
@@ -78,6 +82,7 @@ const initialCustomers: Customer[] = [
 ];
 
 function Customers() {
+  const { id: customerId } = useParams();
   const [customers] = useState<Customer[]>(initialCustomers);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
@@ -107,6 +112,15 @@ function Customers() {
   const inactiveCount = customers.filter(
     (customer) => customer.status === "Inactive"
   ).length;
+  const selectedCustomer = customers.find(
+    (customer) => String(customer.id) === customerId
+  );
+  const selectedCustomerInitials = selectedCustomer?.name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   const handleLogout = () => {
     clearAuthToken();
@@ -249,7 +263,7 @@ function Customers() {
             <div className="tc-cm-breadcrumb">
               <span>Workspace</span>
               <ChevronRight size={15} />
-              <strong>Customers</strong>
+              <strong>{customerId ? "Customer Profile" : "Customers"}</strong>
             </div>
           </div>
 
@@ -280,6 +294,169 @@ function Customers() {
         </header>
 
         <div className="tc-cm-content">
+          {customerId ? (
+            <>
+              <section className="tc-cm-heading tc-cm-profile-heading">
+                <div>
+                  <div className="tc-cm-eyebrow">
+                    <span />
+                    CUSTOMER MANAGEMENT
+                  </div>
+                  <h1>Customer profile</h1>
+                  <p>
+                    {selectedCustomer
+                      ? "Review this customer's account, contact details, and support activity."
+                      : "This customer is not available in the directory."}
+                  </p>
+                </div>
+                <Link to="/admin/customers" className="tc-cm-profile-back">
+                  <ArrowLeft size={18} />
+                  Back to customers
+                </Link>
+              </section>
+
+              {selectedCustomer ? (
+                <div className="tc-cm-profile-layout">
+                  <section className="tc-cm-profile-card">
+                    <div className="tc-cm-profile-cover">
+                      <div className="tc-cm-profile-cover-mark">
+                        <Users size={24} />
+                      </div>
+                    </div>
+                    <div className="tc-cm-profile-main">
+                      <div className="tc-cm-profile-identity">
+                        <div className="tc-cm-profile-avatar" aria-hidden="true">
+                          {selectedCustomerInitials}
+                        </div>
+                        <div className="tc-cm-profile-name">
+                          <span
+                            className={`tc-cm-status tc-cm-status-${selectedCustomer.status.toLowerCase()}`}
+                          >
+                            <span />
+                            {selectedCustomer.status}
+                          </span>
+                          <h2>{selectedCustomer.name}</h2>
+                          <p>
+                            Customer · ID #
+                            {String(selectedCustomer.id).padStart(3, "0")}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="tc-cm-profile-actions">
+                        <a
+                          href={`mailto:${selectedCustomer.email}`}
+                          className="tc-cm-profile-action-primary"
+                        >
+                          <Mail size={17} />
+                          Email customer
+                        </a>
+                        <a
+                          href={`tel:${selectedCustomer.phone.replace(/[^\d+]/g, "")}`}
+                          className="tc-cm-profile-action-secondary"
+                        >
+                          <Phone size={17} />
+                          Call
+                        </a>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="tc-cm-profile-overview">
+                    <div className="tc-cm-profile-section-heading">
+                      <div>
+                        <span>AT A GLANCE</span>
+                        <h2>Account overview</h2>
+                      </div>
+                    </div>
+                    <div className="tc-cm-profile-facts">
+                      <article className="tc-cm-profile-fact">
+                        <div className="tc-cm-profile-fact-icon tc-cm-blue">
+                          <Ticket size={20} />
+                        </div>
+                        <div>
+                          <span>Reported tickets</span>
+                          <strong>{selectedCustomer.tickets}</strong>
+                          <small>Tickets associated with this account</small>
+                        </div>
+                      </article>
+                      <article className="tc-cm-profile-fact">
+                        <div className={`tc-cm-profile-fact-icon ${selectedCustomer.status === "Active" ? "tc-cm-green" : "tc-cm-orange"}`}>
+                          {selectedCustomer.status === "Active" ? (
+                            <UserCheck size={20} />
+                          ) : (
+                            <UserX size={20} />
+                          )}
+                        </div>
+                        <div>
+                          <span>Account status</span>
+                          <strong>{selectedCustomer.status}</strong>
+                          <small>
+                            {selectedCustomer.status === "Active"
+                              ? "Account is currently active"
+                              : "Account is currently inactive"}
+                          </small>
+                        </div>
+                      </article>
+                    </div>
+                  </section>
+
+                  <section className="tc-cm-profile-contact">
+                    <div className="tc-cm-profile-section-heading">
+                      <div>
+                        <span>GET IN TOUCH</span>
+                        <h2>Contact information</h2>
+                      </div>
+                    </div>
+                    <div className="tc-cm-profile-contact-grid">
+                      <a
+                        href={`mailto:${selectedCustomer.email}`}
+                        className="tc-cm-profile-contact-item"
+                      >
+                        <div className="tc-cm-profile-contact-icon">
+                          <Mail size={19} />
+                        </div>
+                        <div>
+                          <span>Email address</span>
+                          <strong>{selectedCustomer.email}</strong>
+                        </div>
+                        <ArrowUpRight size={17} />
+                      </a>
+                      <a
+                        href={`tel:${selectedCustomer.phone.replace(/[^\d+]/g, "")}`}
+                        className="tc-cm-profile-contact-item"
+                      >
+                        <div className="tc-cm-profile-contact-icon">
+                          <Phone size={19} />
+                        </div>
+                        <div>
+                          <span>Phone number</span>
+                          <strong>{selectedCustomer.phone}</strong>
+                        </div>
+                        <ArrowUpRight size={17} />
+                      </a>
+                    </div>
+                  </section>
+                </div>
+              ) : (
+                <section className="tc-cm-bottom-note tc-cm-profile-not-found">
+                  <div className="tc-cm-note-icon">
+                    <UserX size={21} />
+                  </div>
+                  <div>
+                    <strong>Customer not found</strong>
+                    <p>
+                      Return to the customer directory and choose an available
+                      account.
+                    </p>
+                  </div>
+                  <Link to="/admin/customers">
+                    View customers <ChevronRight size={17} />
+                  </Link>
+                </section>
+              )}
+            </>
+          ) : (
+            <>
           <section className="tc-cm-heading">
             <div>
               <div className="tc-cm-eyebrow">
@@ -556,6 +733,8 @@ function Customers() {
             </span>
             <span>Admin workspace · v1.0</span>
           </footer>
+            </>
+          )}
         </div>
       </main>
     </div>
