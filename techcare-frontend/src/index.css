@@ -14,7 +14,7 @@ html {
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #ffffff;
   color: #20252d;
 }
@@ -97,7 +97,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
 
   white-space: nowrap;
@@ -117,7 +117,7 @@ a {
 
   color: white;
 
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
 
   transform: rotate(-8deg);
@@ -148,7 +148,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 
   transition: all 0.2s ease;
@@ -173,7 +173,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 
   padding: 11px 14px;
@@ -200,7 +200,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
 
   transition: all 0.25s ease;
@@ -259,7 +259,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 800;
 
@@ -271,7 +271,7 @@ a {
 
   color: #20252d;
 
-  font-size: clamp(48px, 6vw, 76px);
+  font-size: clamp(50px, 6vw, 78px);
 
   line-height: 1.02;
 
@@ -295,7 +295,7 @@ a {
 
   color: #687384;
 
-  font-size: 16px;
+  font-size: 18px;
 
   line-height: 1.7;
 }
@@ -326,7 +326,7 @@ a {
 
   color: white;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 700;
 
@@ -339,7 +339,7 @@ a {
 }
 
 .hero-primary-btn span {
-  font-size: 18px;
+  font-size: 20px;
 
   line-height: 1;
 }
@@ -370,7 +370,7 @@ a {
 
   background: white;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 600;
 
@@ -548,7 +548,7 @@ a {
 .services-label {
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -560,7 +560,7 @@ a {
 .services-header h2 {
   color: #20252d;
 
-  font-size: 38px;
+  font-size: 40px;
 
   margin-bottom: 12px;
 }
@@ -572,7 +572,7 @@ a {
 
   color: #7d8795;
 
-  font-size: 14px;
+  font-size: 16px;
 
   line-height: 1.7;
 }
@@ -626,7 +626,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .service-card h3 {
@@ -634,13 +634,13 @@ a {
 
   color: #252b35;
 
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .service-card p {
   color: #8993a2;
 
-  font-size: 11px;
+  font-size: 13px;
 
   line-height: 1.7;
 }
@@ -673,7 +673,7 @@ a {
 .about-label {
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -685,7 +685,7 @@ a {
 .about-content h2 {
   color: #20252d;
 
-  font-size: 40px;
+  font-size: 42px;
 
   line-height: 1.1;
 
@@ -695,7 +695,7 @@ a {
 .about-content p {
   color: #737e8e;
 
-  font-size: 13px;
+  font-size: 15px;
 
   line-height: 1.8;
 
@@ -721,7 +721,7 @@ a {
 
   color: #4f5968;
 
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .about-feature-icon {
@@ -738,7 +738,7 @@ a {
 
   color: #25a85a;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 700;
 }
@@ -803,7 +803,7 @@ a {
 
   background: white;
 
-  font-size: 48px;
+  font-size: 50px;
 
   box-shadow:
     0 15px 30px rgba(0,0,0,0.15);
@@ -831,7 +831,7 @@ a {
 .contact-label {
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -843,7 +843,7 @@ a {
 .contact-container h2 {
   color: #20252d;
 
-  font-size: 38px;
+  font-size: 40px;
 
   margin-bottom: 12px;
 }
@@ -851,7 +851,7 @@ a {
 .contact-container > p {
   color: #7d8795;
 
-  font-size: 13px;
+  font-size: 15px;
 
   line-height: 1.7;
 
@@ -893,19 +893,19 @@ a {
 
   color: #1677ff;
 
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .contact-card h3 {
   margin-bottom: 6px;
 
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .contact-card p {
   color: #8993a2;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 
@@ -953,7 +953,7 @@ a {
 
   background: #1677ff;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 800;
 }
@@ -961,7 +961,7 @@ a {
 .footer-logo strong {
   display: block;
 
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .footer-logo span {
@@ -969,7 +969,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 9px;
+  font-size: 11px;
 
   margin-top: 2px;
 }
@@ -977,7 +977,7 @@ a {
 .footer p {
   color: #858e9d;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 
@@ -1090,19 +1090,19 @@ a {
 
   color: #1677ff;
 
-  font-size: 14px;
+  font-size: 16px;
 
   font-weight: 800;
 }
 
 .login-logo h2 {
-  font-size: 20px;
+  font-size: 22px;
 
   margin-bottom: 3px;
 }
 
 .login-logo span {
-  font-size: 10px;
+  font-size: 12px;
 
   color: rgba(255,255,255,0.7);
 }
@@ -1125,7 +1125,7 @@ a {
 
   color: rgba(255,255,255,0.7);
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -1135,7 +1135,7 @@ a {
 .login-welcome h1 {
   margin-bottom: 20px;
 
-  font-size: 50px;
+  font-size: 52px;
 
   line-height: 1.05;
 
@@ -1151,7 +1151,7 @@ a {
 
   color: rgba(255,255,255,0.78);
 
-  font-size: 13px;
+  font-size: 15px;
 
   line-height: 1.7;
 }
@@ -1174,7 +1174,7 @@ a {
 
   color: rgba(255,255,255,0.85);
 
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .login-feature div {
@@ -1190,7 +1190,7 @@ a {
 
   background: rgba(255,255,255,0.15);
 
-  font-size: 12px;
+  font-size: 14px;
 }
 
 
@@ -1214,7 +1214,7 @@ a {
 .login-form > h2 {
   color: #20252d;
 
-  font-size: 28px;
+  font-size: 30px;
 
   margin-bottom: 8px;
 }
@@ -1222,7 +1222,7 @@ a {
 .login-description {
   color: #8b94a2;
 
-  font-size: 12px;
+  font-size: 14px;
 
   margin-bottom: 30px;
 }
@@ -1248,7 +1248,7 @@ a {
 
   color: #3e4652;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 700;
 }
@@ -1268,7 +1268,7 @@ a {
 
   color: #252d3a;
 
-  font-size: 12px;
+  font-size: 14px;
 
   transition: 0.2s ease;
 }
@@ -1302,7 +1302,7 @@ a {
 .password-label a {
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   text-decoration: none;
 }
@@ -1327,7 +1327,7 @@ a {
 
   color: white;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 700;
 
@@ -1359,7 +1359,7 @@ a {
 
   color: #a1a9b5;
 
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .login-divider::before,
@@ -1381,7 +1381,7 @@ a {
 
   color: #8b94a2;
 
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .create-account-link {
@@ -1410,7 +1410,7 @@ a {
 
   color: #7d8795;
 
-  font-size: 10px;
+  font-size: 12px;
 
   text-decoration: none;
 }
@@ -1470,7 +1470,7 @@ a {
 
   color: #20252d;
 
-  font-size: 20px;
+  font-size: 22px;
 
   font-weight: 800;
 }
@@ -1490,7 +1490,7 @@ a {
 
   color: white;
 
-  font-size: 12px;
+  font-size: 14px;
 
   transform: rotate(-7deg);
 }
@@ -1500,7 +1500,7 @@ a {
 
   color: #20252d;
 
-  font-size: 27px;
+  font-size: 29px;
 
   margin-bottom: 8px;
 }
@@ -1510,7 +1510,7 @@ a {
 
   color: #8a94a3;
 
-  font-size: 11px;
+  font-size: 13px;
 
   margin-bottom: 28px;
 }
@@ -1526,7 +1526,7 @@ a {
 
   color: #3e4652;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 700;
 }
@@ -1544,7 +1544,7 @@ a {
 
   outline: none;
 
-  font-size: 12px;
+  font-size: 14px;
 
   color: #252d3a;
 }
@@ -1581,7 +1581,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -1606,7 +1606,7 @@ a {
 
   color: white;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 700;
 
@@ -1635,7 +1635,7 @@ a {
 
   color: #8993a2;
 
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .auth-footer a {
@@ -1716,7 +1716,7 @@ a {
 
   border-radius: 11px;
 
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
 
   transform: rotate(-7deg);
@@ -1728,7 +1728,7 @@ a {
 .dashboard-logo strong {
   display: block;
 
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -1737,7 +1737,7 @@ a {
 
   margin-top: 2px;
 
-  font-size: 10px;
+  font-size: 12px;
 
   color: #8b94a5;
 }
@@ -1750,7 +1750,7 @@ a {
 }
 
 .nav-title {
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -1784,7 +1784,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 500;
 
@@ -1796,7 +1796,7 @@ a {
 
   text-align: center;
 
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .dashboard-nav-link:hover {
@@ -1853,7 +1853,7 @@ a {
 
   border-radius: 50%;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 700;
 }
@@ -1861,7 +1861,7 @@ a {
 .support-box strong {
   display: block;
 
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .support-box p {
@@ -1869,7 +1869,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -1892,7 +1892,7 @@ a {
 
   color: #687384;
 
-  font-size: 12px;
+  font-size: 14px;
 
   text-decoration: none;
 
@@ -1936,7 +1936,7 @@ a {
 .page-label {
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -1946,7 +1946,7 @@ a {
 }
 
 .customer-topbar h2 {
-  font-size: 24px;
+  font-size: 26px;
 
   font-weight: 750;
 }
@@ -1996,13 +1996,13 @@ a {
 
   font-weight: 700;
 
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .user-info strong {
   display: block;
 
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .user-info span {
@@ -2010,7 +2010,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 10px;
+  font-size: 12px;
 
   margin-top: 3px;
 }
@@ -2058,7 +2058,7 @@ a {
 }
 
 .welcome-small {
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -2072,7 +2072,7 @@ a {
 .welcome-content h1 {
   color: white;
 
-  font-size: 32px;
+  font-size: 34px;
 
   line-height: 1.15;
 
@@ -2082,7 +2082,7 @@ a {
 .welcome-content > p:not(.welcome-small) {
   color: rgba(255,255,255,0.82);
 
-  font-size: 13px;
+  font-size: 15px;
 
   line-height: 1.6;
 
@@ -2108,7 +2108,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 700;
 
@@ -2177,7 +2177,7 @@ a {
   right: 85px;
   top: 78px;
 
-  font-size: 70px;
+  font-size: 72px;
 
   transform: rotate(-7deg);
 
@@ -2235,7 +2235,7 @@ a {
 
   border-radius: 11px;
 
-  font-size: 17px;
+  font-size: 19px;
 
   font-weight: 700;
 }
@@ -2265,7 +2265,7 @@ a {
 
   color: #7d8797;
 
-  font-size: 11px;
+  font-size: 13px;
 
   margin-bottom: 4px;
 }
@@ -2275,7 +2275,7 @@ a {
 
   color: #1d2433;
 
-  font-size: 25px;
+  font-size: 27px;
 }
 
 .stat-card small {
@@ -2286,7 +2286,7 @@ a {
 
   color: #a0a7b4;
 
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -2324,7 +2324,7 @@ a {
 }
 
 .card-header h3 {
-  font-size: 16px;
+  font-size: 18px;
 
   margin-bottom: 4px;
 }
@@ -2332,7 +2332,7 @@ a {
 .card-header p {
   color: #969eac;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .card-header > a {
@@ -2340,7 +2340,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 700;
 }
@@ -2382,13 +2382,13 @@ a {
 
   color: #1677ff;
 
-  font-size: 18px;
+  font-size: 20px;
 
   margin-bottom: 10px;
 }
 
 .empty-tickets h4 {
-  font-size: 13px;
+  font-size: 15px;
 
   margin-bottom: 5px;
 }
@@ -2396,7 +2396,7 @@ a {
 .empty-tickets p {
   color: #969eac;
 
-  font-size: 10px;
+  font-size: 12px;
 
   margin-bottom: 12px;
 }
@@ -2406,7 +2406,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 700;
 }
@@ -2488,7 +2488,7 @@ a {
 .quick-action strong {
   display: block;
 
-  font-size: 11px;
+  font-size: 13px;
 
   margin-bottom: 3px;
 }
@@ -2498,13 +2498,13 @@ a {
 
   color: #969eac;
 
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .quick-action b {
   color: #a3aab6;
 
-  font-size: 14px;
+  font-size: 16px;
 }
 
 
@@ -2563,7 +2563,7 @@ a {
 
   border-radius: 10px;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 800;
 
@@ -2573,7 +2573,7 @@ a {
 .report-logo strong {
   display: block;
 
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .report-logo span {
@@ -2581,7 +2581,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 9px;
+  font-size: 11px;
 
   margin-top: 2px;
 }
@@ -2591,7 +2591,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 600;
 }
@@ -2615,7 +2615,7 @@ a {
 .report-title p {
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 800;
 
@@ -2625,7 +2625,7 @@ a {
 }
 
 .report-title h1 {
-  font-size: 30px;
+  font-size: 32px;
 
   margin-bottom: 10px;
 
@@ -2635,7 +2635,7 @@ a {
 .report-title span {
   color: #7f8999;
 
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .report-card {
@@ -2684,13 +2684,13 @@ a {
 
   border-radius: 50%;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 800;
 }
 
 .section-heading h2 {
-  font-size: 16px;
+  font-size: 18px;
 
   margin-bottom: 4px;
 }
@@ -2698,7 +2698,7 @@ a {
 .section-heading p {
   color: #949dac;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .report-grid {
@@ -2720,7 +2720,7 @@ a {
 .report-form-group label {
   color: #3b4351;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -2748,7 +2748,7 @@ a {
 
   font-family: inherit;
 
-  font-size: 12px;
+  font-size: 14px;
 
   outline: none;
 
@@ -2798,7 +2798,7 @@ a {
 .report-submit-area p {
   color: #929aaa;
 
-  font-size: 10px;
+  font-size: 12px;
 
   line-height: 1.5;
 
@@ -2818,7 +2818,7 @@ a {
 
   font-family: inherit;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -2894,7 +2894,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 22px;
+  font-size: 24px;
 
   font-weight: 700;
 }
@@ -2904,7 +2904,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 12px;
+  font-size: 14px;
 
   margin-bottom: 5px;
 }
@@ -2914,7 +2914,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .file-help-text {
@@ -2922,7 +2922,7 @@ a {
 
   color: #9aa3b1;
 
-  font-size: 9px;
+  font-size: 11px;
 
   line-height: 1.5;
 }
@@ -2981,7 +2981,7 @@ a {
 
   color: white;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 800;
 }
@@ -2989,7 +2989,7 @@ a {
 .tickets-logo strong {
   display: block;
 
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .tickets-logo span {
@@ -2999,7 +2999,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .tickets-back {
@@ -3007,7 +3007,7 @@ a {
 
   color: #555;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 600;
 }
@@ -3033,7 +3033,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -3045,13 +3045,13 @@ a {
 
   color: #20252d;
 
-  font-size: 34px;
+  font-size: 36px;
 }
 
 .tickets-title span {
   color: #7d8795;
 
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .tickets-filters {
@@ -3073,7 +3073,7 @@ a {
 
   color: #697586;
 
-  font-size: 12px;
+  font-size: 14px;
 
   cursor: pointer;
 }
@@ -3133,7 +3133,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 25px;
+  font-size: 27px;
 }
 
 .tickets-empty h2 {
@@ -3141,7 +3141,7 @@ a {
 
   color: #303640;
 
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .tickets-empty p {
@@ -3151,7 +3151,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 12px;
+  font-size: 14px;
 
   line-height: 1.6;
 }
@@ -3173,7 +3173,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 700;
 }
@@ -3236,7 +3236,7 @@ a {
 
   color: white;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 800;
 }
@@ -3244,7 +3244,7 @@ a {
 .profile-logo strong {
   display: block;
 
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .profile-logo span {
@@ -3254,7 +3254,7 @@ a {
 
   color: #929aaa;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .profile-back {
@@ -3262,7 +3262,7 @@ a {
 
   text-decoration: none;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 600;
 }
@@ -3289,7 +3289,7 @@ a {
 
   color: #687384;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 600;
 
@@ -3328,7 +3328,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -3340,13 +3340,13 @@ a {
 
   color: #20252d;
 
-  font-size: 34px;
+  font-size: 36px;
 }
 
 .profile-title span {
   color: #7d8795;
 
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .profile-card {
@@ -3389,7 +3389,7 @@ a {
 
   color: #1677ff;
 
-  font-size: 23px;
+  font-size: 25px;
 
   font-weight: 700;
 }
@@ -3399,13 +3399,13 @@ a {
 
   color: #252a32;
 
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .profile-card-header p {
   color: #929aaa;
 
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .profile-section {
@@ -3419,7 +3419,7 @@ a {
 
   color: #303640;
 
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .profile-grid {
@@ -3437,7 +3437,7 @@ a {
 
   color: #687384;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 600;
 }
@@ -3459,7 +3459,7 @@ a {
 
   color: #444b55;
 
-  font-size: 12px;
+  font-size: 14px;
 }
 
 
@@ -3482,13 +3482,13 @@ a {
 
   color: #333;
 
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .security-row p {
   color: #929aaa;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .change-password-btn {
@@ -3502,7 +3502,7 @@ a {
 
   color: #555;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 600;
 
@@ -3536,7 +3536,7 @@ a {
   display: block;
   margin-bottom: 7px;
   color: #687384;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -3549,7 +3549,7 @@ a {
   background: #fafbfc;
   color: #444b55;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .profile-password-field input:focus {
@@ -3561,7 +3561,7 @@ a {
   margin: 0;
   padding: 10px 12px;
   border-radius: 7px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .profile-password-error {
@@ -3593,7 +3593,7 @@ a {
 
   border-radius: 7px;
 
-  font-size: 11px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -3646,7 +3646,7 @@ a {
   }
 
   .navbar-links a {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .navbar-login {
@@ -3673,7 +3673,7 @@ a {
   }
 
   .hero h1 {
-    font-size: 52px;
+    font-size: 54px;
   }
 
   .hero-visual {
@@ -3760,7 +3760,7 @@ a {
   }
 
   .navbar-logo {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .navbar-logo-icon {
@@ -3775,7 +3775,7 @@ a {
   .navbar-start {
     padding: 9px 13px;
 
-    font-size: 11px;
+    font-size: 13px;
   }
 
 
@@ -3789,13 +3789,13 @@ a {
   }
 
   .hero h1 {
-    font-size: 43px;
+    font-size: 45px;
 
     letter-spacing: -2px;
   }
 
   .hero-description {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .hero-buttons {
@@ -3822,7 +3822,7 @@ a {
 
   .services-header h2,
   .contact-container h2 {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .services-grid {
@@ -3834,7 +3834,7 @@ a {
   }
 
   .about-content h2 {
-    font-size: 31px;
+    font-size: 33px;
   }
 
   .contact {
@@ -3887,7 +3887,7 @@ a {
   }
 
   .welcome-content h1 {
-    font-size: 25px;
+    font-size: 27px;
   }
 
   .welcome-decoration {
@@ -3902,7 +3902,7 @@ a {
   }
 
   .back-dashboard {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .report-main {
@@ -3918,7 +3918,7 @@ a {
   }
 
   .report-title h1 {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .report-submit-area {
@@ -3943,7 +3943,7 @@ a {
   }
 
   .tickets-title h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .tickets-filters {
@@ -3966,11 +3966,11 @@ a {
   }
 
   .profile-back {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .profile-logout {
-    font-size: 10px;
+    font-size: 12px;
 
     padding: 8px;
   }
@@ -3980,7 +3980,7 @@ a {
   }
 
   .profile-title h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .profile-grid {
@@ -4035,11 +4035,11 @@ a {
   .mobile-login-logo h2 {
     color: #20252d;
 
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .login-form > h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
 
 
@@ -4054,7 +4054,7 @@ a {
   }
 
   .auth-card > h1 {
-    font-size: 24px;
+    font-size: 26px;
   }
 }
 /* =========================================
@@ -4079,7 +4079,7 @@ a {
   display: block;
   margin-bottom: 15px;
   color: #1677ff;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 1.8px;
 }
@@ -4087,7 +4087,7 @@ a {
 .about-content h2 {
   margin: 0 0 22px;
   color: #20252d;
-  font-size: 44px;
+  font-size: 46px;
   line-height: 1.15;
   font-weight: 800;
 }
@@ -4100,7 +4100,7 @@ a {
   max-width: 620px;
   margin: 0 0 15px;
   color: #737d8c;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.8;
 }
 
@@ -4114,7 +4114,7 @@ a {
   background: #1677ff;
   color: white;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   transition: all 0.25s ease;
 }
@@ -4141,20 +4141,20 @@ a {
   margin-bottom: 25px;
   border-radius: 16px;
   background: white;
-  font-size: 28px;
+  font-size: 30px;
   box-shadow: 0 8px 25px rgba(22, 119, 255, 0.08);
 }
 
 .about-box h3 {
   margin-bottom: 12px;
   color: #252a32;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .about-box p {
   margin: 0;
   color: #7d8795;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.7;
 }
 
@@ -4178,7 +4178,7 @@ a {
   display: block;
   margin-bottom: 12px;
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.7px;
 }
@@ -4186,13 +4186,13 @@ a {
 .services-heading h2 {
   margin-bottom: 12px;
   color: #20252d;
-  font-size: 38px;
+  font-size: 40px;
   font-weight: 800;
 }
 
 .services-heading p {
   color: #7d8795;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .service-grid {
@@ -4226,18 +4226,18 @@ a {
   margin-bottom: 20px;
   border-radius: 13px;
   background: #eef5ff;
-  font-size: 25px;
+  font-size: 27px;
 }
 
 .service-card h3 {
   margin-bottom: 10px;
   color: #2c323b;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .service-card p {
   color: #7d8795;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
 }
 
@@ -4264,7 +4264,7 @@ a {
   display: block;
   margin-bottom: 12px;
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.6px;
 }
@@ -4272,12 +4272,12 @@ a {
 .contact-content h2 {
   margin-bottom: 12px;
   color: #20252d;
-  font-size: 38px;
+  font-size: 40px;
 }
 
 .contact-content p {
   color: #7d8795;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.7;
 }
 
@@ -4291,7 +4291,7 @@ a {
   background: #1677ff;
   color: white;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   transition: all 0.25s ease;
 }
@@ -4330,27 +4330,27 @@ a {
   border-radius: 10px;
   background: #1677ff;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
 }
 
 .footer-brand strong {
   display: block;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .footer-brand span {
   display: block;
   margin-top: 3px;
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .footer-text {
   margin: 0;
   color: #929aaa;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 
@@ -4391,11 +4391,11 @@ a {
   }
 
   .about-content h2 {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   .services-heading h2 {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .service-grid {
@@ -4403,7 +4403,7 @@ a {
   }
 
   .contact-content h2 {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .footer {
@@ -4465,14 +4465,14 @@ a {
   border-radius: 11px;
   background: #1677ff;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   box-shadow: 0 5px 15px rgba(22, 119, 255, 0.2);
 }
 
 .agent-logo strong {
   display: block;
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 800;
 }
 
@@ -4480,7 +4480,7 @@ a {
   display: block;
   margin-top: 3px;
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 
@@ -4500,7 +4500,7 @@ a {
   border-radius: 8px;
   color: #687384;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   transition: all 0.2s ease;
 }
@@ -4518,7 +4518,7 @@ a {
 .agent-nav-icon {
   width: 18px;
   text-align: center;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 
@@ -4541,20 +4541,20 @@ a {
   display: block;
   margin-bottom: 7px;
   color: #303640;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .agent-help-box p {
   margin-bottom: 10px;
   color: #8a94a3;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
 .agent-help-box a {
   color: #1677ff;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -4575,7 +4575,7 @@ a {
   border-radius: 8px;
   background: transparent;
   color: #687384;
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -4614,7 +4614,7 @@ a {
 .agent-page-label {
   margin-bottom: 5px;
   color: #1677ff;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.4px;
 }
@@ -4622,7 +4622,7 @@ a {
 .agent-topbar h1 {
   margin: 0;
   color: #20252d;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
 }
 
@@ -4644,21 +4644,21 @@ a {
   border-radius: 50%;
   background: #eaf3ff;
   color: #1677ff;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
 }
 
 .agent-user strong {
   display: block;
   color: #303640;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .agent-user span {
   display: block;
   margin-top: 3px;
   color: #929aaa;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -4683,7 +4683,7 @@ a {
   display: block;
   margin-bottom: 8px;
   color: #cfe3ff;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.5px;
 }
@@ -4691,14 +4691,14 @@ a {
 .agent-welcome h2 {
   margin-bottom: 8px;
   color: white;
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .agent-welcome p {
   max-width: 600px;
   margin: 0;
   color: #dceaff;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
@@ -4713,7 +4713,7 @@ a {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
   color: white;
-  font-size: 30px;
+  font-size: 32px;
 }
 
 
@@ -4747,7 +4747,7 @@ a {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 700;
 }
 
@@ -4775,12 +4775,12 @@ a {
   display: block;
   margin-bottom: 5px;
   color: #8b95a4;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .agent-stat-card strong {
   color: #252a32;
-  font-size: 23px;
+  font-size: 25px;
 }
 
 
@@ -4802,18 +4802,18 @@ a {
 .agent-section-header h2 {
   margin-bottom: 5px;
   color: #252a32;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .agent-section-header p {
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .agent-view-all {
   color: #1677ff;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -4847,7 +4847,7 @@ a {
   background: #fafbfc;
   border-bottom: 1px solid #edf0f4;
   color: #8993a2;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-align: left;
   text-transform: uppercase;
@@ -4874,14 +4874,14 @@ a {
 .agent-ticket-id {
   display: block;
   color: #1677ff;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .agent-ticket-time {
   display: block;
   margin-top: 4px;
   color: #a0a8b4;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 
@@ -4903,13 +4903,13 @@ a {
   border-radius: 50%;
   background: #eef5ff;
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 }
 
 .agent-customer span {
   color: #424955;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -4918,7 +4918,7 @@ a {
 
 .agent-device {
   color: #555e6b;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 
@@ -4928,7 +4928,7 @@ a {
   display: block;
   max-width: 180px;
   color: #555e6b;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -4940,7 +4940,7 @@ a {
   align-items: center;
   padding: 5px 8px;
   border-radius: 5px;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
 }
 
@@ -4967,7 +4967,7 @@ a {
   align-items: center;
   padding: 5px 9px;
   border-radius: 5px;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -5004,7 +5004,7 @@ a {
   background: white;
   color: #1677ff;
   text-decoration: none;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   transition: all 0.2s ease;
 }
@@ -5046,7 +5046,7 @@ a {
   border-radius: 9px;
   background: #ebfaf1;
   color: #26a65b;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .agent-info-icon.blue-icon {
@@ -5057,12 +5057,12 @@ a {
 .agent-info-card h3 {
   margin-bottom: 6px;
   color: #303640;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .agent-info-card p {
   color: #8a94a3;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.6;
 }
 
@@ -5164,7 +5164,7 @@ a {
   border-radius: 7px;
   background: white;
   color: #697586;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -5179,7 +5179,7 @@ a {
   border-radius: 50%;
   background: #f1f3f6;
   color: #7c8795;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .agent-filter-btn:hover {
@@ -5239,18 +5239,18 @@ a {
   border-radius: 50%;
   background: #ebfaf1;
   color: #26a65b;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .agent-no-tickets h3 {
   margin-bottom: 7px;
   color: #303640;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .agent-no-tickets p {
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 /* =========================================
    AGENT MY TICKETS PAGE
@@ -5279,7 +5279,7 @@ a {
 .agent-tickets-topbar h1 {
   margin: 0;
   color: #20252d;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
 }
 
@@ -5296,12 +5296,12 @@ a {
 .agent-tickets-intro h2 {
   margin-bottom: 6px;
   color: #252a32;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .agent-tickets-intro p {
   color: #929aaa;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 
@@ -5341,12 +5341,12 @@ a {
   display: block;
   margin-bottom: 8px;
   color: #8993a2;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .agent-summary-card strong {
   color: #252a32;
-  font-size: 25px;
+  font-size: 27px;
 }
 
 
@@ -5375,7 +5375,7 @@ a {
   border-radius: 7px;
   background: white;
   color: #697586;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -5409,7 +5409,7 @@ a {
 
 .agent-ticket-search span {
   color: #929aaa;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .agent-ticket-search input {
@@ -5418,7 +5418,7 @@ a {
   outline: none;
   background: transparent;
   color: #444b55;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .agent-ticket-search input::placeholder {
@@ -5453,7 +5453,7 @@ a {
   background: #fafbfc;
   border-bottom: 1px solid #edf0f4;
   color: #8993a2;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-align: left;
   text-transform: uppercase;
@@ -5476,7 +5476,7 @@ a {
 
 .agent-full-ticket-id {
   color: #1677ff;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 
@@ -5490,7 +5490,7 @@ a {
 
 .agent-full-customer span {
   color: #424955;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -5500,7 +5500,7 @@ a {
 .agent-ticket-created {
   white-space: nowrap;
   color: #7d8795;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -5516,7 +5516,7 @@ a {
   background: white;
   color: #1677ff;
   text-decoration: none;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
   transition: all 0.2s ease;
@@ -5637,7 +5637,7 @@ a {
   border-radius: 11px;
   background: #1677ff;
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   box-shadow: 0 5px 15px rgba(22, 119, 255, 0.2);
 }
@@ -5648,14 +5648,14 @@ a {
 }
 
 .customer-dashboard-logo strong {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 800;
 }
 
 .customer-dashboard-logo span {
   margin-top: 3px;
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .customer-dashboard-nav {
@@ -5671,7 +5671,7 @@ a {
   padding: 12px 14px;
   border-radius: 8px;
   color: #687384;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
@@ -5680,7 +5680,7 @@ a {
 .customer-dashboard-nav-link span {
   width: 18px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .customer-dashboard-nav-link:hover,
@@ -5706,19 +5706,19 @@ a {
   display: block;
   margin-bottom: 7px;
   color: #303640;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .customer-support-box p {
   margin: 0 0 10px;
   color: #8a94a3;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
 .customer-support-box a {
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
 }
@@ -5737,7 +5737,7 @@ a {
   border-radius: 8px;
   background: transparent;
   color: #687384;
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
@@ -5771,7 +5771,7 @@ a {
 .customer-ticket-details-topbar p {
   margin-bottom: 5px;
   color: #1677ff;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.3px;
 }
@@ -5779,7 +5779,7 @@ a {
 .customer-ticket-details-topbar h1 {
   margin: 0;
   color: #20252d;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
 }
 
@@ -5798,7 +5798,7 @@ a {
   border-radius: 50%;
   background: #eaf3ff;
   color: #1677ff;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -5806,12 +5806,12 @@ a {
   display: block;
   margin-bottom: 3px;
   color: #343a43;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .customer-ticket-user span {
   color: #929aaa;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -5825,7 +5825,7 @@ a {
   margin-bottom: 18px;
   color: #687384;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -5852,19 +5852,19 @@ a {
 .customer-ticket-number {
   margin-bottom: 7px;
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
 .customer-ticket-header-left h2 {
   margin-bottom: 6px;
   color: #252a32;
-  font-size: 21px;
+  font-size: 23px;
 }
 
 .customer-ticket-header-left p {
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .customer-ticket-header-right {
@@ -5885,7 +5885,7 @@ a {
   justify-content: center;
   padding: 7px 11px;
   border-radius: 6px;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
 }
 
@@ -5956,14 +5956,14 @@ a {
   flex-shrink: 0;
   border-radius: 9px;
   background: #eef5ff;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .customer-ticket-info-card span {
   display: block;
   margin-bottom: 5px;
   color: #9aa3b0;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: .8px;
 }
@@ -5972,12 +5972,12 @@ a {
   display: block;
   margin-bottom: 3px;
   color: #3b424c;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .customer-ticket-info-card p {
   color: #9aa3b0;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -6001,14 +6001,14 @@ a {
   display: block;
   margin-bottom: 5px;
   color: #1677ff;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
 }
 
 .customer-ticket-section-title h2 {
   color: #303640;
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .customer-problem-box {
@@ -6022,12 +6022,12 @@ a {
   display: block;
   margin-bottom: 7px;
   color: #383f49;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .customer-problem-box p {
   color: #737e8d;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.7;
 }
 
@@ -6056,14 +6056,14 @@ a {
   display: block;
   margin-bottom: 5px;
   color: #1677ff;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
 }
 
 .customer-conversation-header h2 {
   color: #303640;
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .conversation-status {
@@ -6071,7 +6071,7 @@ a {
   border-radius: 20px;
   background: #edf9f1;
   color: #29945a;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -6111,7 +6111,7 @@ a {
   border-radius: 50%;
   background: #eef5ff;
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -6139,12 +6139,12 @@ a {
 
 .customer-message-meta strong {
   color: #424954;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .customer-message-meta span {
   color: #a0a8b4;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .customer-message-bubble {
@@ -6152,7 +6152,7 @@ a {
   border-radius: 10px;
   background: #f4f6f9;
   color: #515a66;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
@@ -6189,7 +6189,7 @@ a {
   background: white;
   color: #444b55;
   font-family: inherit;
-  font-size: 10px;
+  font-size: 12px;
   box-sizing: border-box;
 }
 
@@ -6212,7 +6212,7 @@ a {
 
 .customer-message-actions span {
   color: #9aa3b0;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .customer-send-message-btn {
@@ -6221,7 +6221,7 @@ a {
   border-radius: 7px;
   background: #1677ff;
   color: white;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   transition: all .2s ease;
@@ -6258,7 +6258,7 @@ a {
   border-radius: 50%;
   background: #fff2c9;
   color: #c28a13;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -6269,13 +6269,13 @@ a {
 .customer-confirm-content h2 {
   margin-bottom: 5px;
   color: #45403a;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .customer-confirm-content p {
   max-width: 600px;
   color: #8b8272;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.6;
 }
 
@@ -6285,7 +6285,7 @@ a {
   border-radius: 7px;
   background: #29945a;
   color: white;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -6322,19 +6322,19 @@ a {
   border-radius: 50%;
   background: #29945a;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
 }
 
 .customer-confirmed-card h2 {
   margin-bottom: 5px;
   color: #287448;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .customer-confirmed-card p {
   color: #6c927a;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -6438,7 +6438,7 @@ a {
 .agent-ticket-details-topbar p {
   margin-bottom: 5px;
   color: #1677ff;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.3px;
 }
@@ -6446,7 +6446,7 @@ a {
 .agent-ticket-details-topbar h1 {
   margin: 0;
   color: #20252d;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
 }
 
@@ -6456,7 +6456,7 @@ a {
   margin-bottom: 20px;
   color: #697586;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -6484,19 +6484,19 @@ a {
   display: inline-block;
   margin-bottom: 8px;
   color: #1677ff;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
 }
 
 .agent-ticket-details-header h2 {
   margin-bottom: 7px;
   color: #252a32;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .agent-ticket-details-header p {
   color: #929aaa;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .agent-ticket-details-status-area {
@@ -6512,7 +6512,7 @@ a {
   justify-content: center;
   padding: 7px 11px;
   border-radius: 6px;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
 }
 
@@ -6559,7 +6559,7 @@ a {
   display: block;
   margin-bottom: 8px;
   color: #929aaa;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.8px;
 }
@@ -6568,12 +6568,12 @@ a {
   display: block;
   margin-bottom: 5px;
   color: #303640;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .agent-ticket-details-info-card p {
   color: #929aaa;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -6597,14 +6597,14 @@ a {
   display: block;
   margin-bottom: 6px;
   color: #1677ff;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
 }
 
 .agent-detail-section-title h2 {
   color: #303640;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .agent-problem-box {
@@ -6618,12 +6618,12 @@ a {
   display: block;
   margin-bottom: 8px;
   color: #303640;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .agent-problem-box p {
   color: #687384;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.7;
 }
 
@@ -6648,7 +6648,7 @@ a {
   display: block;
   margin-bottom: 6px;
   color: #1677ff;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
 }
@@ -6656,12 +6656,12 @@ a {
 .agent-ticket-status-card h2 {
   margin-bottom: 5px;
   color: #303640;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .agent-ticket-status-card p {
   color: #929aaa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .agent-status-buttons {
@@ -6676,7 +6676,7 @@ a {
   border-radius: 7px;
   background: white;
   color: #697586;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -6717,19 +6717,19 @@ a {
   display: block;
   margin-bottom: 6px;
   color: #1677ff;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
 }
 
 .agent-conversation-header h2 {
   color: #303640;
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .agent-live-status {
   color: #26a65b;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -6759,7 +6759,7 @@ a {
   border-radius: 50%;
   background: #eaf3ff;
   color: #1677ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -6776,12 +6776,12 @@ a {
 
 .agent-message-meta strong {
   color: #303640;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .agent-message-meta span {
   color: #a0a8b4;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .agent-message-bubble {
@@ -6789,7 +6789,7 @@ a {
   border-radius: 8px;
   background: #f5f7fa;
   color: #505966;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
@@ -6833,7 +6833,7 @@ a {
   background: white;
   color: #444b55;
   font-family: inherit;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .agent-message-form textarea:focus {
@@ -6850,7 +6850,7 @@ a {
 
 .agent-message-actions span {
   color: #929aaa;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .agent-send-message-btn {
@@ -6859,7 +6859,7 @@ a {
   border-radius: 7px;
   background: #1677ff;
   color: white;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -6905,7 +6905,7 @@ a {
   display: block;
   margin-bottom: 5px;
   color: #929aaa;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.8px;
 }
@@ -6913,12 +6913,12 @@ a {
 .agent-confirmation-content h2 {
   margin-bottom: 5px;
   color: #303640;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .agent-confirmation-content p {
   color: #929aaa;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
@@ -6928,13 +6928,38 @@ a {
   border-radius: 7px;
   background: #26a65b;
   color: white;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .agent-close-ticket-btn:hover {
   background: #218c4e;
+}
+
+.navbar-logo-icon,
+.footer-logo-icon,
+.logo-icon,
+.auth-logo-icon,
+.dashboard-logo-icon,
+.report-logo-icon,
+.tickets-logo-icon,
+.profile-logo-icon,
+.customer-password-brand span,
+.tc-brand-icon,
+.tc-ag-brand-icon,
+.tc-cm-brand-icon,
+.agent-logo-icon,
+.customer-dashboard-logo-icon,
+.agent-ticket-brand-icon {
+  background-color: transparent !important;
+  background-image: url("/techcare-logo-mark.png") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  box-shadow: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
 }
 
 

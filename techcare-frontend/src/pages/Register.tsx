@@ -69,7 +69,7 @@ function Register() {
         throw new Error(data.message || `Unable to create account (HTTP ${response.status}).`);
       }
 
-      if (!data.token || !data.user?.role) {
+      if (!data.token || data.user?.role !== "CUSTOMER") {
         throw new Error("The server did not return a login token and user role.");
       }
 
@@ -77,16 +77,7 @@ function Register() {
       setAuthToken(data.token, data.user.role);
       sessionStorage.setItem("user", JSON.stringify(data.user));
 
-      if (data.user.role === "ADMIN") {
-        navigate("/admin/dashboard");
-      } else if (data.user.role === "AGENT") {
-        navigate("/agent/dashboard");
-      } else if (data.user.role === "CUSTOMER") {
-        navigate("/customer/dashboard");
-      } else {
-        clearAuthToken();
-        throw new Error("Unknown account role.");
-      }
+      navigate("/customer/dashboard");
     } catch (err) {
       setError(
         err instanceof TypeError

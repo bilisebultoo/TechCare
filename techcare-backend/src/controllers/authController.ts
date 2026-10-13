@@ -78,22 +78,19 @@ export const register = async (
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const role = password.includes("#A#") ? "AGENT" : "CUSTOMER";
 
     const user = await User.create({
       name,
       email: email.trim().toLowerCase(),
       phone: normalizedPhone,
       password: hashedPassword,
-      role,
+      role: "CUSTOMER",
     });
 
     const token = generateToken(user._id.toString(), user.role);
 
     res.status(201).json({
-      message: user.role === "AGENT"
-        ? "Agent account created successfully."
-        : "Customer account created successfully.",
+      message: "Customer account created successfully.",
       token,
       user: {
         id: user._id,
@@ -295,6 +292,90 @@ export const getActiveAgents = async (
 
     res.status(500).json({
       message: "Server error while getting agents.",
+    });
+  }
+};
+
+export const getManagedUsers = async (
+  _req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const users = await User.find({
+      role: { $in: ["AGENT", "CUSTOMER"] },
+    })
+      .select("name email phone role isActive createdAt")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      users: users.map((user) => ({
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        isActive: user.isActive,
+        createdAt: user.createdAt,
+      })),
+    });
+  } catch (error) {
+    console.error("Get managed users error:", error);
+    res.status(500).json({
+      message: "Server error while getting accounts.",
+    });
+  }
+};
+
+export const updateUserRole = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const { role } = req.body;
+    if (role !== "AGENT" && role !== "CUSTOMER") {
+      res.status(400).json({
+        message: "Account role must be AGENT or CUSTOMER.",
+      });
+      return;
+    }
+
+    const userId = req.params.id;
+    if (typeof userId !== "string" || !/^[a-f\d]{24}$/i.test(userId)) {
+      res.status(400).json({ message: "Invalid account ID." });
+      return;
+    }
+
+    const user = await User.findOne({
+      _id: userId,
+      role: { $in: ["AGENT", "CUSTOMER"] },
+    });
+    if (!user) {
+      res.status(404).json({
+        message: "Account not found or cannot be assigned a role.",
+      });
+      return;
+    }
+
+    user.role = role;
+    if (role === "CUSTOMER") user.specialization = undefined;
+    await user.save();
+
+    res.status(200).json({
+      message: `Account role updated to ${role === "AGENT" ? "agent" : "customer"}.`,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        isActive: user.isActive,
+        createdAt: user.createdAt,
+      },
+    });
+  } catch (error) {
+    console.error("Update user role error:", error);
+    res.status(500).json({
+      message: "Server error while updating the account role.",
     });
   }
 };

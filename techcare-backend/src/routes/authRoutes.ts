@@ -6,9 +6,11 @@ import {
   createCustomer,
   changePassword,
   getActiveAgents,
+  getManagedUsers,
   login,
   getMe,
   updateAgentSpecialization,
+  updateUserRole,
 } from "../controllers/authController";
 
 import { authMiddleware } from "../middleware/authMiddleware";
@@ -17,6 +19,20 @@ import { roleMiddleware } from "../middleware/roleMiddleware";
 const router = Router();
 
 router.post("/register", register);
+
+router.get(
+  "/users",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  getManagedUsers
+);
+
+router.patch(
+  "/users/:id/role",
+  authMiddleware,
+  roleMiddleware("ADMIN"),
+  updateUserRole
+);
 
 router.get(
   "/agents",

@@ -432,12 +432,12 @@ function AgentTicketDetails() {
           display: "flex", alignItems: "center", gap: 10,
           textDecoration: "none", color: "#20252d", marginBottom: 40,
         }}>
-          <div style={{
+          <div className="agent-ticket-brand-icon" style={{
             width: 40, height: 40, background: "#1677ff", color: "#fff",
             borderRadius: 10, display: "grid", placeItems: "center", fontWeight: 800,
           }}>TC</div>
-          <div><strong style={{ display: "block", fontSize: 17 }}>TechCare</strong>
-            <span style={{ color: "#929aaa", fontSize: 10 }}>Agent Portal</span></div>
+          <div><strong style={{ display: "block", fontSize: 19 }}>TechCare</strong>
+            <span style={{ color: "#929aaa", fontSize: 12 }}>Agent Portal</span></div>
         </Link>
         <nav style={{ display: "grid", gap: 6 }}>
           <Link to="/agent/dashboard" style={navStyle}>▦ &nbsp; Dashboard</Link>
@@ -462,24 +462,24 @@ function AgentTicketDetails() {
           justifyContent: "space-between", borderBottom: "1px solid #e7ebf0",
         }}>
           <div>
-            <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 9, fontWeight: 700 }}>
+            <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 11, fontWeight: 700 }}>
               TECHCARE AGENT PORTAL
             </p>
-            <h1 style={{ margin: 0, fontSize: 25, color: "#20252d" }}>Ticket Details</h1>
+            <h1 style={{ margin: 0, fontSize: 27, color: "#20252d" }}>Ticket Details</h1>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{
               width: 38, height: 38, borderRadius: "50%", background: "#eaf3ff",
               color: "#1677ff", display: "grid", placeItems: "center", fontWeight: 700,
             }}>A</div>
-            <div><strong style={{ display: "block", fontSize: 12 }}>Support Agent</strong>
-              <span style={{ color: "#929aaa", fontSize: 10 }}>Agent Account</span></div>
+            <div><strong style={{ display: "block", fontSize: 14 }}>Support Agent</strong>
+              <span style={{ color: "#929aaa", fontSize: 12 }}>Agent Account</span></div>
           </div>
         </header>
 
         <Link to="/agent/tickets" style={{
           display: "inline-block", marginTop: 25, marginBottom: 20,
-          color: "#697586", textDecoration: "none", fontSize: 12, fontWeight: 600,
+          color: "#697586", textDecoration: "none", fontSize: 14, fontWeight: 600,
         }}>← Back to My Tickets</Link>
 
         {error && <div role="alert" style={alertStyle}>{error}</div>}
@@ -493,9 +493,9 @@ function AgentTicketDetails() {
               justifyContent: "space-between", gap: 20,
             }}>
               <div>
-                <span style={{ color: "#1677ff", fontSize: 11, fontWeight: 800 }}>#{ticket._id}</span>
-                <h2 style={{ margin: "8px 0", color: "#252a32", fontSize: 23 }}>{ticket.title}</h2>
-                <p style={{ margin: 0, color: "#929aaa", fontSize: 11 }}>Customer: {customerName}</p>
+                <span style={{ color: "#1677ff", fontSize: 13, fontWeight: 800 }}>#{ticket._id}</span>
+                <h2 style={{ margin: "8px 0", color: "#252a32", fontSize: 25 }}>{ticket.title}</h2>
+                <p style={{ margin: 0, color: "#929aaa", fontSize: 13 }}>Customer: {customerName}</p>
               </div>
               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                 <span style={badgeStyle}>{ticket.priority}</span>
@@ -513,30 +513,30 @@ function AgentTicketDetails() {
             </section>
 
             <section style={{ ...cardStyle, padding: 25, marginTop: 15 }}>
-              <p style={{ margin: "0 0 7px", color: "#1677ff", fontSize: 8, fontWeight: 800 }}>
+              <p style={{ margin: "0 0 7px", color: "#1677ff", fontSize: 10, fontWeight: 800 }}>
                 PROBLEM INFORMATION
               </p>
-              <h2 style={{ margin: "0 0 18px", fontSize: 17, color: "#303640" }}>Problem Description</h2>
+              <h2 style={{ margin: "0 0 18px", fontSize: 19, color: "#303640" }}>Problem Description</h2>
               <div style={{ padding: 18, background: "#f8fafc", borderRadius: 8 }}>
-                <strong style={{ display: "block", marginBottom: 8, color: "#303640", fontSize: 12 }}>
+                <strong style={{ display: "block", marginBottom: 8, color: "#303640", fontSize: 14 }}>
                   {ticket.title}
                 </strong>
-                <p style={{ margin: 0, color: "#687384", fontSize: 11, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
+                <p style={{ margin: 0, color: "#687384", fontSize: 13, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
                   {ticket.description}
                 </p>
               </div>
               {problemReportAttachments && (
                 <div style={{ marginTop: 20 }}>
-                  <h3 style={{ margin: "0 0 10px", fontSize: 14, color: "#303640" }}>
+                  <h3 style={{ margin: "0 0 10px", fontSize: 16, color: "#303640" }}>
                     Customer attachments
                   </h3>
                   {attachmentError && (
-                    <p role="alert" style={{ color: "#b42318", fontSize: 12 }}>
+                    <p role="alert" style={{ color: "#b42318", fontSize: 14 }}>
                       {attachmentError}
                     </p>
                   )}
                   {problemReportAttachments.attachments.length === 0 ? (
-                    <p style={{ color: "#929aaa", fontSize: 12 }}>
+                    <p style={{ color: "#929aaa", fontSize: 14 }}>
                       No files were attached to the original problem report.
                     </p>
                   ) : (
@@ -557,7 +557,7 @@ function AgentTicketDetails() {
                                 {attachment.originalName}
                               </a>
                             ) : (
-                              <span style={{ color: "#687384", fontSize: 12 }}>
+                              <span style={{ color: "#687384", fontSize: 14 }}>
                                 {attachment.originalName} (loading...)
                               </span>
                             )}
@@ -574,7 +574,7 @@ function AgentTicketDetails() {
             </section>
 
             <section style={{ ...cardStyle, padding: "22px 25px", marginTop: 15 }}>
-              <h2 style={{ margin: "0 0 15px", fontSize: 16, color: "#303640" }}>Update Ticket Status</h2>
+              <h2 style={{ margin: "0 0 15px", fontSize: 18, color: "#303640" }}>Update Ticket Status</h2>
               <div style={{ display: "flex", gap: 8 }}>
                 {(["OPEN", "IN_PROGRESS", "RESOLVED"] as const).map((value) => (
                   <button
@@ -588,22 +588,22 @@ function AgentTicketDetails() {
                   </button>
                 ))}
               </div>
-              {savingStatus && <p style={{ color: "#929aaa", fontSize: 11 }}>Saving status...</p>}
+              {savingStatus && <p style={{ color: "#929aaa", fontSize: 13 }}>Saving status...</p>}
             </section>
 
             <section style={{ ...cardStyle, marginTop: 15, overflow: "hidden" }}>
               <div style={{ padding: "22px 25px", borderBottom: "1px solid #edf0f4" }}>
-                <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 8, fontWeight: 800 }}>
+                <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 10, fontWeight: 800 }}>
                   CUSTOMER COMMUNICATION
                 </p>
-                <h2 style={{ margin: 0, fontSize: 17, color: "#303640" }}>
+                <h2 style={{ margin: 0, fontSize: 19, color: "#303640" }}>
                   Conversation{ticket.status === "CLOSED" ? " (Closed)" : ""}
                 </h2>
               </div>
 
               <div style={{ padding: 25, display: "grid", gap: 16 }}>
                 {messages.length === 0 ? (
-                  <div style={{ color: "#929aaa", fontSize: 11 }}>
+                  <div style={{ color: "#929aaa", fontSize: 13 }}>
                     No messages have been added to this ticket yet.
                   </div>
                 ) : (
@@ -634,7 +634,7 @@ function AgentTicketDetails() {
                             placeItems: "center",
                             background: isAgent ? "#1677ff" : "#e9eefb",
                             color: isAgent ? "#fff" : "#566174",
-                            fontSize: 10,
+                            fontSize: 12,
                             fontWeight: 800,
                           }}
                         >
@@ -651,12 +651,12 @@ function AgentTicketDetails() {
                           }}
                         >
                           <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
-                            <strong style={{ fontSize: 11 }}>
+                            <strong style={{ fontSize: 13 }}>
                               {isAgent ? "Support Agent" : customerName}
                             </strong>
-                            <span style={{ fontSize: 9, color: "#929aaa" }}>{sentAt}</span>
+                            <span style={{ fontSize: 11, color: "#929aaa" }}>{sentAt}</span>
                           </div>
-                          <div style={{ fontSize: 11, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
+                          <div style={{ fontSize: 13, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
                             {item.message}
                           </div>
                         </div>
@@ -681,7 +681,7 @@ function AgentTicketDetails() {
                       border: "1px solid #dfe5ec",
                       borderRadius: 8,
                       padding: "12px 14px",
-                      fontSize: 11,
+                      fontSize: 13,
                       color: "#303640",
                       boxSizing: "border-box",
                     }}
@@ -696,7 +696,7 @@ function AgentTicketDetails() {
                         borderRadius: 8,
                         background: sendingMessage || !messageText.trim() ? "#c4d9ff" : "#1677ff",
                         color: "#fff",
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: 700,
                         cursor: sendingMessage || !messageText.trim() ? "not-allowed" : "pointer",
                       }}
@@ -710,13 +710,13 @@ function AgentTicketDetails() {
 
             <section style={{ ...cardStyle, marginTop: 15, overflow: "hidden" }}>
               <div style={{ padding: "22px 25px", borderBottom: "1px solid #edf0f4" }}>
-                <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 8, fontWeight: 800 }}>
+                <p style={{ margin: "0 0 6px", color: "#1677ff", fontSize: 10, fontWeight: 800 }}>
                   PRIVATE TEAM CHAT
                 </p>
-                <h2 style={{ margin: 0, fontSize: 17, color: "#303640" }}>
+                <h2 style={{ margin: 0, fontSize: 19, color: "#303640" }}>
                   Conversation with Admin
                 </h2>
-                <p style={{ margin: "6px 0 0", color: "#929aaa", fontSize: 10 }}>
+                <p style={{ margin: "6px 0 0", color: "#929aaa", fontSize: 12 }}>
                   These messages are private and are not visible to the customer.
                 </p>
               </div>
@@ -725,7 +725,7 @@ function AgentTicketDetails() {
                   <div role="alert" style={alertStyle}>{internalMessageError}</div>
                 )}
                 {internalMessages.length === 0 ? (
-                  <div style={{ color: "#929aaa", fontSize: 11 }}>
+                  <div style={{ color: "#929aaa", fontSize: 13 }}>
                     No admin messages yet.
                   </div>
                 ) : internalMessages.map((item) => (
@@ -741,15 +741,15 @@ function AgentTicketDetails() {
                     }}
                   >
                     <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
-                      <strong style={{ fontSize: 11 }}>
+                      <strong style={{ fontSize: 13 }}>
                         {item.senderName} ({item.sender === "ADMIN" ? "Admin" : "You"})
                       </strong>
-                      <span style={{ fontSize: 9, color: "#929aaa" }}>
+                      <span style={{ fontSize: 11, color: "#929aaa" }}>
                         {item.createdAt ? new Date(item.createdAt).toLocaleString() : "Just now"}
                       </span>
                     </div>
                     {item.message && (
-                      <div style={{ fontSize: 11, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
+                      <div style={{ fontSize: 13, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
                         {item.message}
                       </div>
                     )}
@@ -761,7 +761,7 @@ function AgentTicketDetails() {
                           target="_blank"
                           rel="noreferrer"
                           key={attachment._id}
-                          style={{ display: "grid", gap: 6, marginTop: 8, color: "#1677ff", fontSize: 11 }}
+                          style={{ display: "grid", gap: 6, marginTop: 8, color: "#1677ff", fontSize: 13 }}
                         >
                           {attachment.mimeType.startsWith("image/") && (
                             <img
@@ -773,7 +773,7 @@ function AgentTicketDetails() {
                           {attachment.originalName}
                         </a>
                       ) : (
-                        <span key={attachment._id} style={{ display: "block", fontSize: 11 }}>
+                        <span key={attachment._id} style={{ display: "block", fontSize: 13 }}>
                           {attachment.originalName} (loading...)
                         </span>
                       );
@@ -799,12 +799,12 @@ function AgentTicketDetails() {
                         border: "1px solid #dfe5ec",
                         borderRadius: 8,
                         padding: "12px 14px",
-                        fontSize: 11,
+                        fontSize: 13,
                         color: "#303640",
                         boxSizing: "border-box",
                       }}
                     />
-                    <label style={{ color: "#1677ff", fontSize: 11, fontWeight: 650 }}>
+                    <label style={{ color: "#1677ff", fontSize: 13, fontWeight: 650 }}>
                       Attach files
                       <input
                         type="file"
@@ -825,7 +825,7 @@ function AgentTicketDetails() {
                       />
                     </label>
                     {internalMessageFiles.length > 0 && (
-                      <ul style={{ margin: 0, paddingLeft: 20, color: "#687384", fontSize: 11 }}>
+                      <ul style={{ margin: 0, paddingLeft: 20, color: "#687384", fontSize: 13 }}>
                         {internalMessageFiles.map((file, index) => (
                           <li key={`${file.name}-${index}`}>
                             {file.name}{" "}
@@ -849,7 +849,7 @@ function AgentTicketDetails() {
                           borderRadius: 8,
                           background: sendingInternalMessage || (!internalMessageText.trim() && internalMessageFiles.length === 0) ? "#c4d9ff" : "#1677ff",
                           color: "#fff",
-                          fontSize: 10,
+                          fontSize: 12,
                           fontWeight: 700,
                           cursor: sendingInternalMessage || (!internalMessageText.trim() && internalMessageFiles.length === 0) ? "not-allowed" : "pointer",
                         }}
@@ -867,10 +867,10 @@ function AgentTicketDetails() {
               display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20,
             }}>
               <div>
-                <h2 style={{ margin: "0 0 6px", color: "#303640", fontSize: 14 }}>
+                <h2 style={{ margin: "0 0 6px", color: "#303640", fontSize: 16 }}>
                   Customer Confirmation
                 </h2>
-                <p style={{ margin: 0, color: "#929aaa", fontSize: 10 }}>
+                <p style={{ margin: 0, color: "#929aaa", fontSize: 12 }}>
                   {ticket.customerConfirmed
                     ? ticket.status === "CLOSED"
                       ? "The customer confirmed the problem is solved. This ticket is closed."
@@ -889,7 +889,7 @@ function AgentTicketDetails() {
                   padding: "10px 16px", border: 0, borderRadius: 7,
                   background: ticket.customerConfirmed && ticket.status !== "CLOSED" ? "#1677ff" : "#e8ebef",
                   color: ticket.customerConfirmed && ticket.status !== "CLOSED" ? "#fff" : "#7b8491",
-                  fontSize: 9, fontWeight: 700,
+                  fontSize: 11, fontWeight: 700,
                   cursor: ticket.customerConfirmed && ticket.status !== "CLOSED" && !savingStatus
                     ? "pointer"
                     : "not-allowed",
@@ -918,13 +918,13 @@ function InfoCard({
 }) {
   return (
     <div style={{ ...cardStyle, padding: 20 }}>
-      <span style={{ display: "block", marginBottom: 8, color: "#929aaa", fontSize: 8, fontWeight: 800 }}>
+      <span style={{ display: "block", marginBottom: 8, color: "#929aaa", fontSize: 10, fontWeight: 800 }}>
         {title}
       </span>
-      <strong style={{ display: "block", marginBottom: 5, color: "#303640", fontSize: 12 }}>
+      <strong style={{ display: "block", marginBottom: 5, color: "#303640", fontSize: 14 }}>
         {value}
       </strong>
-      <p style={{ margin: 0, color: "#929aaa", fontSize: 9 }}>{description}</p>
+      <p style={{ margin: 0, color: "#929aaa", fontSize: 11 }}>{description}</p>
     </div>
   );
 }
@@ -942,7 +942,7 @@ const alertStyle = {
   borderRadius: 8,
   background: "#fff1f1",
   color: "#b42318",
-  fontSize: 12,
+  fontSize: 14,
 } as const;
 
 const successStyle = {
@@ -952,7 +952,7 @@ const successStyle = {
   borderRadius: 8,
   background: "#effaf2",
   color: "#207548",
-  fontSize: 12,
+  fontSize: 14,
 } as const;
 
 const closedConversationStyle = {
@@ -961,7 +961,7 @@ const closedConversationStyle = {
   borderRadius: 8,
   background: "#f7f9fc",
   color: "#687384",
-  fontSize: 11,
+  fontSize: 13,
 } as const;
 
 const navStyle = {
@@ -970,7 +970,7 @@ const navStyle = {
   borderRadius: 8,
   textDecoration: "none",
   color: "#687384",
-  fontSize: 11,
+  fontSize: 13,
   fontWeight: 600,
 } as const;
 
@@ -981,7 +981,7 @@ function statusButton(active: boolean) {
     borderRadius: 7,
     background: active ? "#1677ff" : "#fff",
     color: active ? "#fff" : "#697586",
-    fontSize: 9,
+    fontSize: 11,
     fontWeight: 700,
     cursor: "pointer",
   } as const;
@@ -992,7 +992,7 @@ const badgeStyle = {
   background: "#eaf3ff",
   color: "#1677ff",
   borderRadius: 6,
-  fontSize: 9,
+  fontSize: 11,
   fontWeight: 800,
 } as const;
 

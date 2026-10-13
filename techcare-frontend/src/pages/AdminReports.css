@@ -22,21 +22,21 @@
 
 .ar-eyebrow {
   color: #1677ff;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .ar-header h1 {
   margin: 10px 0 6px;
-  font-size: 29px;
+  font-size: 31px;
 }
 
 .ar-header p,
 .ar-panel-heading p {
   margin: 0;
   color: #8491a5;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .ar-refresh {
@@ -94,12 +94,12 @@
 
 .ar-stat-card span {
   color: #8491a5;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .ar-stat-card strong {
   margin-top: 7px;
-  font-size: 25px;
+  font-size: 27px;
 }
 
 .ar-panel {
@@ -115,12 +115,12 @@
 
 .ar-panel-heading h2 {
   margin: 0 0 7px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .ar-panel-heading > span {
   color: #667085;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .ar-breakdown {
@@ -135,7 +135,7 @@
   gap: 12px;
   margin-bottom: 9px;
   color: #475467;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .ar-breakdown-label span {
@@ -165,7 +165,7 @@
   margin: 0;
   padding: 30px 23px;
   color: #8491a5;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
 }
 
@@ -176,7 +176,7 @@
   padding: 19px 0;
   border-top: 1px solid #edf0f5;
   color: #475467;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .ar-priority strong {

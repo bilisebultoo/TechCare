@@ -4,7 +4,7 @@
   margin: 18px auto;
   padding: 16px;
   border-radius: 9px;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .profile-loading {
@@ -43,7 +43,7 @@
   background: #fafbfc;
   color: #444b55;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .agent-specialization-form select:focus {

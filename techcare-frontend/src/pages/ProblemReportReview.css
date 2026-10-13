@@ -3,7 +3,6 @@
   min-height: 100vh;
   background: #f7f9fc;
   color: #172b4d;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .problem-report-review-page *,
@@ -31,20 +30,20 @@
 
 .pvr-eyebrow {
   color: #2563eb;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 750;
   letter-spacing: 1.2px;
 }
 
 .pvr-header h1 {
   margin: 9px 0 6px;
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .pvr-header p {
   margin: 0;
   color: #8491a5;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .pvr-back-link {
@@ -56,7 +55,7 @@
   border-radius: 8px;
   background: #fff;
   color: #475467;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -101,26 +100,26 @@
 
 .pvr-summary-copy > span {
   color: #8a96a8;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .pvr-summary-copy h2 {
   margin: 4px 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .pvr-summary-copy p {
   margin: 0;
   color: #8491a5;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .pvr-status {
   padding: 7px 11px;
   border-radius: 18px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: capitalize;
 }
@@ -146,7 +145,7 @@
   border-radius: 18px;
   background: #f1f4f8;
   color: #475467;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -200,13 +199,13 @@
 .pvr-card-heading h2 {
   margin: 0 0 5px;
   color: #26354d;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .pvr-card-heading p {
   margin: 0;
   color: #8491a5;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -224,13 +223,13 @@
 
 .pvr-detail-grid > div > span {
   color: #8491a5;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .pvr-detail-grid strong {
   overflow-wrap: anywhere;
   color: #344054;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 650;
 }
 
@@ -243,13 +242,13 @@
 
 .pvr-problem strong {
   color: #26354d;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .pvr-problem p {
   margin: 9px 0 0;
   color: #667085;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.7;
   white-space: pre-wrap;
 }
@@ -270,7 +269,7 @@
   background: #fff;
   color: #475467;
   font: inherit;
-  font-size: 13px;
+  font-size: 15px;
   text-align: left;
   cursor: pointer;
 }
@@ -304,14 +303,14 @@
 .pvr-saving {
   margin: 12px 0 0;
   color: #8491a5;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .pvr-agent-label {
   display: block;
   margin-bottom: 7px;
   color: #475467;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 650;
 }
 
@@ -324,7 +323,7 @@
   background: #fff;
   color: #344054;
   font: inherit;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .pvr-assign-button {
@@ -336,7 +335,7 @@
   background: #2563eb;
   color: #fff;
   font: inherit;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 650;
   cursor: pointer;
 }
@@ -349,7 +348,7 @@
 .pvr-assignment-complete {
   margin: 0;
   color: #16835d;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -369,12 +368,12 @@
 
 .pvr-assigned-agent span {
   color: #8491a5;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .pvr-assigned-agent strong {
   color: #344054;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .pvr-attachments {
@@ -401,7 +400,7 @@
 
 .pvr-attachment a {
   color: #2563eb;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   overflow-wrap: anywhere;
 }
@@ -409,12 +408,12 @@
 .pvr-attachment small,
 .pvr-attachment-empty {
   color: #8491a5;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .pvr-attachment-error {
   color: #b42318;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .pvr-internal-messages {
@@ -440,13 +439,13 @@
 .pvr-internal-message strong,
 .pvr-internal-message small {
   color: #8491a5;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .pvr-internal-message p {
   margin: 7px 0;
   color: #344054;
-  font-size: 13px;
+  font-size: 15px;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
@@ -464,13 +463,13 @@
   border: 1px solid #dce4ef;
   border-radius: 8px;
   font: inherit;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .pvr-chat-file-label {
   justify-self: start;
   color: #2563eb;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 650;
   cursor: pointer;
 }
@@ -480,7 +479,7 @@
   max-width: 100%;
   margin-top: 5px;
   color: #475467;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .pvr-chat-selected-files {
@@ -488,7 +487,7 @@
   margin: 0;
   padding-left: 20px;
   color: #475467;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .pvr-chat-selected-files li {
@@ -510,7 +509,7 @@
   gap: 6px;
   margin: 8px 0;
   color: #2563eb;
-  font-size: 12px;
+  font-size: 14px;
   overflow-wrap: anywhere;
 }
 
@@ -527,7 +526,7 @@
   border-radius: 7px;
   background: #2563eb;
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 650;
   cursor: pointer;
 }
@@ -550,13 +549,13 @@
 
 .pvr-secure-note strong {
   color: #344b73;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .pvr-secure-note p {
   margin: 5px 0 0;
   color: #718096;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -578,7 +577,7 @@
 
 .pvr-alert p {
   margin: 5px 0 0;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .pvr-notice {
@@ -586,7 +585,7 @@
   border: 1px solid #b6e6cc;
   background: #effaf4;
   color: #16835d;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .pvr-state {
@@ -599,7 +598,7 @@
   border-radius: 13px;
   background: #fff;
   color: #667085;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .pvr-state-error {

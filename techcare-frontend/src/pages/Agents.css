@@ -6,8 +6,7 @@
   min-height: 100vh;
   color: #17233c;
   background: #f5f7fb;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .tc-agent-management * {
@@ -47,7 +46,7 @@
   background: linear-gradient(145deg, #4b91ff, #2454d8);
   box-shadow: 0 6px 18px #2563eb45;
   color: white;
-  font-size: 23px;
+  font-size: 25px;
   font-weight: 800;
 }
 
@@ -58,13 +57,13 @@
 }
 
 .tc-ag-brand-text strong {
-  font-size: 19px;
+  font-size: 21px;
   letter-spacing: -0.6px;
 }
 
 .tc-ag-brand-text span {
   color: #9baac5;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 1.15px;
   font-weight: 700;
 }
@@ -76,7 +75,7 @@
 .tc-ag-nav-label {
   margin: 0 10px 12px;
   color: #71819f;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1.5px;
   font-weight: 800;
 }
@@ -94,7 +93,7 @@
   padding: 0 12px;
   border-radius: 9px;
   color: #b9c5da;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 550;
   transition: background 0.2s, color 0.2s;
 }
@@ -141,19 +140,19 @@
 .tc-ag-help-card strong {
   display: block;
   color: white;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .tc-ag-help-card p {
   margin: 7px 0 11px;
   color: #a3b0c6;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
 .tc-ag-help-card > span {
   color: #8cb5ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -184,7 +183,7 @@
   margin-top: 9px;
   border-top: 1px solid #ffffff13;
   color: #9ba9c0;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .tc-ag-online-dot {
@@ -229,7 +228,7 @@
 .tc-ag-breadcrumb {
   gap: 9px;
   color: #8994a7;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .tc-ag-breadcrumb strong {
@@ -244,7 +243,7 @@
 .tc-ag-system-label {
   gap: 8px;
   color: #748197;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .tc-ag-bell {
@@ -296,12 +295,12 @@
 
 .tc-ag-admin strong {
   color: #25334d;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .tc-ag-admin span {
   color: #8a95a8;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .tc-ag-menu-toggle {
@@ -329,7 +328,7 @@
   gap: 8px;
   margin-bottom: 10px;
   color: #657795;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.5px;
 }
@@ -345,7 +344,7 @@
 .tc-ag-heading h1 {
   margin: 0;
   color: #17233c;
-  font-size: clamp(26px, 3vw, 33px);
+  font-size: clamp(28px, 3vw, 35px);
   font-weight: 800;
   letter-spacing: -1.1px;
 }
@@ -353,7 +352,7 @@
 .tc-ag-heading p {
   margin: 9px 0 0;
   color: #7d899d;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -369,7 +368,7 @@
   color: white;
   background: #2563eb;
   box-shadow: 0 5px 12px #2563eb25;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
   transition: background 0.2s, transform 0.2s;
@@ -440,21 +439,21 @@
 
 .tc-ag-stat-details > span {
   color: #758197;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.5;
 }
 
 .tc-ag-stat-details > strong {
   color: #1c2a44;
-  font-size: 27px;
+  font-size: 29px;
   line-height: 1;
   letter-spacing: -0.8px;
 }
 
 .tc-ag-stat-details > small {
   color: #a0a9b8;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -493,13 +492,13 @@
 
 .tc-ag-team-banner-text strong {
   color: #243654;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .tc-ag-team-banner-text p {
   margin: 5px 0 0;
   color: #7d8ca5;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
@@ -520,7 +519,7 @@
   border-radius: 50%;
   color: #2b64d8;
   background: #dce8ff;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
 }
 
@@ -569,7 +568,7 @@
 .tc-ag-table-title h2 {
   margin: 0;
   color: #1b2942;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
 }
 
@@ -579,7 +578,7 @@
   border-radius: 6px;
   color: #2863db;
   background: #edf3ff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   text-align: center;
 }
@@ -587,7 +586,7 @@
 .tc-ag-table-heading p {
   margin: 7px 0 0;
   color: #8994a7;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -600,7 +599,7 @@
   border-radius: 8px;
   color: #68768e;
   background: #fbfcfe;
-  font-size: 11px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -640,7 +639,7 @@
   color: #25334d;
   background: transparent;
   font: inherit;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .tc-ag-search input::placeholder {
@@ -676,7 +675,7 @@
   color: #53617a;
   background: transparent;
   font: inherit;
-  font-size: 11px;
+  font-size: 13px;
   cursor: pointer;
 }
 
@@ -699,7 +698,7 @@
   padding: 14px 16px;
   border-bottom: 1px solid #edf0f5;
   color: #8b96a9;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.7px;
   white-space: nowrap;
@@ -709,7 +708,7 @@
   padding: 16px;
   border-bottom: 1px solid #eef1f6;
   color: #5f6d83;
-  font-size: 11px;
+  font-size: 13px;
   vertical-align: middle;
 }
 
@@ -742,7 +741,7 @@
   border-radius: 11px;
   color: #2b64d8;
   background: #edf3ff;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
 }
 
@@ -779,14 +778,14 @@
 
 .tc-ag-agent-cell strong {
   color: #26344e;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   white-space: nowrap;
 }
 
 .tc-ag-agent-cell span {
   color: #9aa4b4;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .tc-ag-contact a {
@@ -800,7 +799,7 @@
 
 .tc-ag-contact span {
   color: #9aa4b4;
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -813,7 +812,7 @@
   border-radius: 7px;
   color: #526680;
   background: #f8faff;
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -834,12 +833,12 @@
 
 .tc-ag-workload-top strong {
   color: #26344e;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .tc-ag-workload-top span {
   color: #9aa4b4;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .tc-ag-workload-track {
@@ -862,7 +861,7 @@
   gap: 7px;
   padding: 7px 10px;
   border-radius: 20px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -911,7 +910,7 @@
 
 .tc-ag-view {
   padding: 0 9px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -944,7 +943,7 @@
 
 .tc-ag-empty > strong {
   color: #26344e;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .tc-ag-empty > span {
@@ -969,7 +968,7 @@
   border-top: 1px solid #edf0f5;
   color: #929caf;
   background: #fcfdff;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .tc-ag-footer-note {
@@ -1006,13 +1005,13 @@
 
 .tc-ag-bottom-note strong {
   color: #243654;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .tc-ag-bottom-note p {
   margin: 5px 0 0;
   color: #7d8ca5;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -1021,7 +1020,7 @@
   align-items: center;
   gap: 5px;
   color: #2864df;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   white-space: nowrap;
 }
@@ -1033,7 +1032,7 @@
   gap: 15px;
   padding: 24px 0 4px;
   color: #9aa4b4;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .tc-ag-overlay {
@@ -1055,7 +1054,7 @@
   border-radius: 9px;
   color: #52617a;
   background: white;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
@@ -1138,7 +1137,7 @@
   color: #2457bb;
   background: linear-gradient(145deg, #e8efff, #d4e2ff);
   box-shadow: 0 6px 15px #183b7b18;
-  font-size: 23px;
+  font-size: 25px;
   font-weight: 800;
   letter-spacing: 0.5px;
 }
@@ -1151,14 +1150,14 @@
 .tc-ag-profile-name .tc-ag-status {
   margin-bottom: 7px;
   padding: 5px 8px;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .tc-ag-profile-name h2 {
   margin: 0;
   overflow-wrap: anywhere;
   color: #1b2942;
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 800;
   letter-spacing: -0.5px;
 }
@@ -1166,7 +1165,7 @@
 .tc-ag-profile-name p {
   margin: 5px 0 0;
   color: #8994a7;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .tc-ag-profile-actions {
@@ -1185,7 +1184,7 @@
   padding: 0 13px;
   border: 1px solid transparent;
   border-radius: 8px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   white-space: nowrap;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
@@ -1225,7 +1224,7 @@
 
 .tc-ag-profile-section-heading > div > span {
   color: #8a96a9;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.25px;
 }
@@ -1233,7 +1232,7 @@
 .tc-ag-profile-section-heading h2 {
   margin: 6px 0 0;
   color: #1b2942;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
 }
 
@@ -1273,20 +1272,20 @@
 .tc-ag-profile-fact > div:last-child > span,
 .tc-ag-profile-contact-item > div:nth-child(2) > span {
   color: #8994a7;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 
 .tc-ag-profile-fact strong {
   overflow-wrap: anywhere;
   color: #26344e;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.4;
 }
 
 .tc-ag-profile-fact small {
   color: #a0a9b8;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .tc-ag-profile-contact-grid {
@@ -1328,7 +1327,7 @@
 .tc-ag-profile-contact-item strong {
   overflow-wrap: anywhere;
   color: #34435c;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -1449,7 +1448,7 @@
 
   .tc-ag-breadcrumb {
     gap: 5px;
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .tc-ag-admin {
@@ -1500,15 +1499,15 @@
   }
 
   .tc-ag-stat-details > span {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .tc-ag-stat-details > strong {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .tc-ag-stat-details > small {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .tc-ag-team-banner {
@@ -1582,7 +1581,7 @@
     height: 68px;
     margin-top: -30px;
     border-radius: 19px;
-    font-size: 19px;
+    font-size: 21px;
   }
 
   .tc-ag-profile-name {
@@ -1590,7 +1589,7 @@
   }
 
   .tc-ag-profile-name h2 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .tc-ag-profile-actions {

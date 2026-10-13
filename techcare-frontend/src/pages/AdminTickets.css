@@ -23,21 +23,21 @@
 
 .at-eyebrow {
   color: #1677ff;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .at-header h1 {
   margin: 10px 0 6px;
-  font-size: 29px;
+  font-size: 31px;
 }
 
 .at-header p,
 .at-panel-header p {
   margin: 0;
   color: #8491a5;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .at-refresh {
@@ -90,12 +90,12 @@
 
 .at-stat-card span {
   color: #8491a5;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .at-stat-card strong {
   margin-top: 7px;
-  font-size: 25px;
+  font-size: 27px;
 }
 
 .at-panel {
@@ -111,12 +111,12 @@
 
 .at-panel-header h2 {
   margin: 0 0 7px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .at-count {
   color: #667085;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .at-toolbar {
@@ -170,7 +170,7 @@
   padding: 14px 17px;
   background: #f8faff;
   color: #8491a5;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   white-space: nowrap;
@@ -180,7 +180,7 @@
   padding: 17px;
   border-top: 1px solid #edf0f5;
   color: #475467;
-  font-size: 13px;
+  font-size: 15px;
   vertical-align: middle;
 }
 
@@ -199,7 +199,7 @@
   display: inline-block;
   padding: 6px 9px;
   border-radius: 20px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
 }

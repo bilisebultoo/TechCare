@@ -17,7 +17,6 @@
   min-height: 100vh;
   background: var(--pr-page-bg);
   color: var(--pr-text);
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
   box-sizing: border-box;
 }
 
@@ -52,7 +51,7 @@
   display: block;
   margin-bottom: 8px;
   color: #8b96aa;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.5px;
 }
@@ -60,7 +59,7 @@
 .problem-reports-page .pr-topbar h1 {
   margin: 0;
   color: var(--pr-text);
-  font-size: 27px;
+  font-size: 29px;
   font-weight: 750;
   letter-spacing: -0.7px;
 }
@@ -68,7 +67,7 @@
 .problem-reports-page .pr-topbar p {
   margin: 7px 0 0;
   color: var(--pr-muted);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -88,7 +87,7 @@
   border-radius: 50%;
   background: #4169e1;
   color: #ffffff;
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 800;
 }
 
@@ -100,12 +99,12 @@
 
 .problem-reports-page .pr-admin-identity strong {
   color: #25324a;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .problem-reports-page .pr-admin-identity span {
   color: #8792a6;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* MAIN CONTENT */
@@ -144,7 +143,7 @@
 .problem-reports-page .pr-heading-copy h2 {
   margin: 0;
   color: #1b2942;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 750;
   letter-spacing: -0.4px;
 }
@@ -152,7 +151,7 @@
 .problem-reports-page .pr-heading-copy p {
   margin: 6px 0 0;
   color: var(--pr-muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -167,7 +166,7 @@
   border-radius: 10px;
   background: #ffffff;
   color: #3d4b65;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s, transform 0.2s;
@@ -261,14 +260,14 @@
 
 .problem-reports-page .pr-stat-info > span {
   color: #76839a;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
 }
 
 .problem-reports-page .pr-stat-info > strong {
   color: #1a2740;
-  font-size: 29px;
+  font-size: 31px;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -1px;
@@ -276,7 +275,7 @@
 
 .problem-reports-page .pr-stat-info > small {
   color: #9aa4b5;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -302,14 +301,14 @@
 .problem-reports-page .pr-panel-heading h2 {
   margin: 0;
   color: #1c2941;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 750;
 }
 
 .problem-reports-page .pr-panel-heading p {
   margin: 6px 0 0;
   color: #8b96a9;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -320,7 +319,7 @@
   border-radius: 8px;
   background: #f8faff;
   color: #64728a;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -366,7 +365,7 @@
   background: transparent;
   color: #273650;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .problem-reports-page .pr-search-box input::placeholder {
@@ -390,7 +389,7 @@
   border-radius: 8px;
   background: transparent;
   color: #7b879c;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 650;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
@@ -415,7 +414,7 @@
   padding: 0 5px;
   border-radius: 6px;
   background: #ffffff;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* TABLE */
@@ -440,7 +439,7 @@
   border-bottom: 1px solid #e8edf4;
   background: #f8faff;
   color: #7c889c;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.55px;
   text-transform: uppercase;
@@ -462,7 +461,7 @@
   border-bottom: 1px solid #eff2f6;
   background: #ffffff;
   color: #344158;
-  font-size: 12px;
+  font-size: 14px;
   vertical-align: middle;
 }
 
@@ -510,14 +509,14 @@
 
 .problem-reports-page .pr-report-cell strong {
   color: #3459c5;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
 }
 
 .problem-reports-page .pr-report-cell span {
   color: #9aa4b5;
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -530,7 +529,7 @@
   border-radius: 50%;
   background: #eaf0ff;
   color: #4169e1;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
 }
 
@@ -538,7 +537,7 @@
   max-width: 165px;
   overflow: hidden;
   color: #2a3850;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -548,7 +547,7 @@
   max-width: 165px;
   overflow: hidden;
   color: #9aa4b5;
-  font-size: 10px;
+  font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -560,20 +559,20 @@
 .problem-reports-page .pr-device-cell strong,
 .problem-reports-page .pr-problem-cell strong {
   color: #354158;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   line-height: 1.5;
 }
 
 .problem-reports-page .pr-device-cell span {
   color: #7c889b;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
 .problem-reports-page .pr-device-cell small {
   color: #a0a9b8;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .problem-reports-page .pr-problem-cell {
@@ -589,7 +588,7 @@
   display: -webkit-box;
   overflow: hidden;
   color: #8994a7;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   overflow-wrap: anywhere;
   -webkit-box-orient: vertical;
@@ -608,14 +607,14 @@
   padding: 6px 9px;
   border: 1px solid transparent;
   border-radius: 7px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 750;
   white-space: nowrap;
 }
 
 .problem-reports-page .pr-priority-unassigned {
   color: #8994a7;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .problem-reports-page .pr-priority > span,
@@ -676,7 +675,7 @@
   border-radius: 7px;
   background: #f8fafc;
   color: #475467;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -702,7 +701,7 @@
 
 .problem-reports-page .pr-date {
   color: #748198;
-  font-size: 11px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -719,7 +718,7 @@
   border-radius: 8px;
   background: #f0f4ff;
   color: #3b60d4;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   text-decoration: none;
   white-space: nowrap;
@@ -770,14 +769,14 @@
 .problem-reports-page .pr-empty-state h3 {
   margin: 0;
   color: #29364e;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .problem-reports-page .pr-empty-state p {
   max-width: 360px;
   margin: 8px 0 16px;
   color: #8792a5;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
 }
 
@@ -788,7 +787,7 @@
   border-radius: 8px;
   background: #eef2ff;
   color: #345bd2;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 750;
   cursor: pointer;
 }
@@ -816,13 +815,13 @@
 }
 
 .problem-reports-page .pr-error strong {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .problem-reports-page .pr-error p {
   margin: 5px 0 0;
   color: #8c5555;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
@@ -846,7 +845,7 @@
   border-top: 1px solid #e9edf4;
   background: #fcfdff;
   color: #929caf;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .problem-reports-page .pr-table-footer strong {
@@ -915,7 +914,7 @@
   }
 
   .problem-reports-page .pr-topbar h1 {
-    font-size: 23px;
+    font-size: 25px;
   }
 
   .problem-reports-page .pr-topbar-actions {
@@ -942,7 +941,7 @@
   }
 
   .problem-reports-page .pr-heading-copy h2 {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   .problem-reports-page .pr-refresh-button {
@@ -971,15 +970,15 @@
   }
 
   .problem-reports-page .pr-stat-info > strong {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .problem-reports-page .pr-stat-info > span {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .problem-reports-page .pr-stat-info > small {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .problem-reports-page .pr-panel-heading {
@@ -997,7 +996,7 @@
 
   .problem-reports-page .pr-filter-button {
     padding: 0 8px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .problem-reports-page .pr-table-footer {
