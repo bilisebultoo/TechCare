@@ -20,6 +20,7 @@ import AgentTicketDetails from "../pages/AgentTicketDetails";
 import AgentProfile from "../pages/AgentProfile";
 
 // ================= ADMIN =================
+import AdminAccounts from "../pages/AdminAccounts";
 import AdminDashboard from "../pages/AdminDashboard";
 import Customers from "../pages/Customers";
 import CreateCustomer from "../pages/CreateCustomer";
@@ -140,6 +141,11 @@ function AppRoutes() {
       <Route
         path="/admin/dashboard"
         element={<AdminDashboard />}
+      />
+
+      <Route
+        path="/admin/accounts"
+        element={<AdminAccounts />}
       />
 
       <Route

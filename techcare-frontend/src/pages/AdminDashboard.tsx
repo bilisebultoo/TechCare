@@ -69,10 +69,6 @@ function AdminDashboard() {
   const [tickets, setTickets] = useState<DashboardTicket[]>([]);
   const [problemReports, setProblemReports] = useState<DashboardReport[]>([]);
   const [accounts, setAccounts] = useState<ManagedUser[]>([]);
-  const [accountSearch, setAccountSearch] = useState("");
-  const [accountError, setAccountError] = useState("");
-  const [accountNotice, setAccountNotice] = useState("");
-  const [updatingAccountId, setUpdatingAccountId] = useState<string | null>(null);
   const [activeAgentCount, setActiveAgentCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [dashboardError, setDashboardError] = useState("");
@@ -126,7 +122,7 @@ function AdminDashboard() {
           if (active) setAccounts(accountData.users);
         } catch (error) {
           if (active) {
-            setAccountError(error instanceof Error ? error.message : "Unable to load accounts.");
+            setDashboardError(error instanceof Error ? error.message : "Unable to load accounts.");
           }
         }
       } catch (error) {
@@ -156,51 +152,6 @@ function AdminDashboard() {
     ticket.status === "RESOLVED" || ticket.status === "CLOSED"
   ).length;
   const customerAccountCount = accounts.filter((account) => account.role === "CUSTOMER").length;
-  const visibleAccounts = accounts.filter((account) =>
-    `${account.name} ${account.email} ${account.phone} ${account.role}`
-      .toLowerCase()
-      .includes(accountSearch.trim().toLowerCase())
-  );
-
-  const handleRoleChange = async (account: ManagedUser, role: ManagedUser["role"]) => {
-    if (account.role === role) return;
-    setUpdatingAccountId(account.id);
-    setAccountError("");
-    setAccountNotice("");
-
-    try {
-      const token = getAuthToken();
-      const response = await fetch(`/api/auth/users/${account.id}/role`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ role }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || `Unable to update account role (HTTP ${response.status}).`);
-      }
-      if (data.user?.id !== account.id || data.user.role !== role) {
-        throw new Error("The server did not confirm the account role change.");
-      }
-      setAccounts((current) =>
-        current.map((item) => item.id === account.id ? { ...item, role } : item)
-      );
-      setActiveAgentCount(
-        accounts.filter((item) =>
-          item.isActive && (item.id === account.id ? role === "AGENT" : item.role === "AGENT")
-        ).length
-      );
-      setAccountNotice(`${account.name}'s role is now ${role === "AGENT" ? "Agent" : "Customer"}.`);
-    } catch (error) {
-      setAccountError(error instanceof Error ? error.message : "Unable to update account role.");
-    } finally {
-      setUpdatingAccountId(null);
-    }
-  };
-
   const handleLogout = () => {
     clearAuthToken();
     window.location.href = "/login";
@@ -294,6 +245,10 @@ function AdminDashboard() {
           <Link to="/admin/settings" className="tc-nav-link">
             <Settings size={19} />
             <span>Settings</span>
+          </Link>
+          <Link to="/admin/accounts" className="tc-nav-link" onClick={() => setSidebarOpen(false)}>
+            <Users size={19} />
+            <span>Account Management</span>
           </Link>
         </nav>
 
@@ -622,79 +577,6 @@ function AdminDashboard() {
                 <ArrowUpRight size={17} />
               </Link>
             </article>
-          </section>
-
-          <section className="tc-panel tc-accounts-panel">
-            <div className="tc-panel-header tc-accounts-header">
-              <div>
-                <div className="tc-panel-title-row">
-                  <h2>Account management</h2>
-                  <span className="tc-panel-count">{accounts.length}</span>
-                </div>
-                <p>New signups start as customers. Assign customer or agent access here.</p>
-              </div>
-              <label className="tc-account-search">
-                <Search size={16} />
-                <input
-                  type="search"
-                  placeholder="Search accounts..."
-                  aria-label="Search accounts"
-                  value={accountSearch}
-                  onChange={(event) => setAccountSearch(event.target.value)}
-                />
-              </label>
-            </div>
-
-            {accountError && <p className="tc-account-message tc-account-error" role="alert">{accountError}</p>}
-            {accountNotice && <p className="tc-account-message tc-account-success" role="status">{accountNotice}</p>}
-
-            <div className="tc-table-wrap">
-              <table className="tc-ticket-table tc-account-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Account role</th>
-                    <th>Created</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {visibleAccounts.map((account) => (
-                    <tr key={account.id}>
-                      <td><strong>{account.name}</strong></td>
-                      <td>{account.email}</td>
-                      <td>{account.phone}</td>
-                      <td>
-                        <select
-                          className="tc-account-role"
-                          aria-label={`Role for ${account.name}`}
-                          value={account.role}
-                          disabled={updatingAccountId === account.id}
-                          onChange={(event) => {
-                            const role = event.target.value;
-                            if (role === "AGENT" || role === "CUSTOMER") {
-                              void handleRoleChange(account, role);
-                            }
-                          }}
-                        >
-                          <option value="CUSTOMER">Customer</option>
-                          <option value="AGENT">Agent</option>
-                        </select>
-                      </td>
-                      <td>{new Date(account.createdAt).toLocaleDateString()}</td>
-                    </tr>
-                  ))}
-                  {!loading && visibleAccounts.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="tc-empty">
-                        {accountError ? "Account data is unavailable." : accounts.length ? "No accounts match your search." : "No registered accounts yet."}
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
           </section>
 
           <section className="tc-bottom-banner">
